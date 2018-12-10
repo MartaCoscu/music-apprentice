@@ -3,10 +3,9 @@
 namespace musicapprentice\Http\Controllers;
 
 use Illuminate\Http\Request;
-use musicapprentice\User; 
-use musicapprentice\Exercice; 
+use musicapprentice\Session;
 
-class userController extends Controller
+class sessionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +13,15 @@ class userController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(Request $request)
-    {
 
-        $user = $request->user();  
-        return $user->sessions()->get(); 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        //
     }
 
     /**
@@ -28,7 +31,7 @@ class userController extends Controller
      */
     public function create()
     {
-        //
+        return view ('musicapprentice.sessions.create'); 
     }
 
     /**
@@ -39,7 +42,14 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $session = new Session(); 
+        $session->name = $request->name; 
+        $session->description = $request->description; 
+        $session->user_id = $request->user()->id; 
+        $session->save(); 
+
+        return redirect()->route('home', [$exercice])->with('status', 'Sesión creada correctamente');
+
     }
 
     /**
@@ -50,8 +60,7 @@ class userController extends Controller
      */
     public function show($id)
     {
-
-        return 'hola estoy retornando un user especifico';
+        //
     }
 
     /**
@@ -83,8 +92,10 @@ class userController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Session $session)
     {
-        //
+        $session->delete(); 
+        return redirect()->route('home')->with('status', 'Sesión borrada correctamente');
+
     }
 }
