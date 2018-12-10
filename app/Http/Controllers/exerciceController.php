@@ -180,7 +180,25 @@ class exerciceController extends Controller
      */
     public function destroy(Exercice $exercice)
     {
+        if(!empty($exercice->image)){
+            $image_path = public_path().'/images/'.$exercice->image;
+            \File::delete($image_path);
+        }
+
+        if(!empty($exercice->video)){
+            $video_path = public_path().'/videos/'.$exercice->video;
+            \File::delete($video_path);
+        }
+
+          if(!empty($exercice->audio)){
+            $audio_path = public_path().'/audios/'.$exercice->audio;
+            \File::delete($audio_path);
+        }
+      
+
+
         $exercice->delete();
+
         return redirect()->route('exercices.index')->with('status', 'Ejercicio borrado correctamente');
 
     }

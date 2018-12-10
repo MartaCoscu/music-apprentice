@@ -48,7 +48,7 @@ class sessionController extends Controller
         $session->user_id = $request->user()->id; 
         $session->save(); 
 
-        return redirect()->route('home', [$exercice])->with('status', 'Sesión creada correctamente');
+        return redirect()->route('home')->with('status', 'Sesión creada correctamente');
 
     }
 
