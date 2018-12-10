@@ -50,6 +50,10 @@ class exerciceController extends Controller
      */
     public function store(Request $request)
     {
+
+
+
+
         $exercice = new Exercice(); 
         $exercice->name = $request->name;
         $exercice->text = $request->text;
@@ -129,6 +133,13 @@ class exerciceController extends Controller
      */
     public function update(Request $request, Exercice $exercice)
     {
+
+        $validatedData = $request->validate([
+
+            'name' => 'required',
+            'description' => 'required',
+            'text' => 'required',
+        ]);
 
         $exercice->name = $request->name;
         $exercice->description = $request->description;

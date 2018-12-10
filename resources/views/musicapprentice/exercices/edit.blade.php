@@ -7,6 +7,17 @@
                 <div class="card">
                     <div class="card-header">Dashboard</div>
 
+
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
                     <div class="card-body">
                         @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -22,12 +33,12 @@
 
                             <div class = "form-group">
                                 <label for="">Nombre</label>
-                                <input name="name" type="text" value={{ $exercice->name }} class="form-control">
+                                <input name="name" required type="text" value={{ $exercice->name }} class="form-control">
                             </div>
 
                             <div class = "form-group">
                                 <label for="">Resumen</label>
-                                <textarea name="description" class="form-control">{{ $exercice->description }} 
+                                <textarea name="description" required class="form-control">{{ $exercice->description }} 
                                 </textarea>
                             </div>
 
@@ -48,7 +59,7 @@
 
                             <div class = "form-group">
                                 <label for="">Ejercicio</label>
-                                <textarea name="text" class="form-control">{{ $exercice->text }}</textarea>
+                                <textarea name="text" required class="form-control">{{ $exercice->text }}</textarea>
                             </div>
 
 
@@ -121,7 +132,7 @@
 
                                 <form class="form-group" method="POST" action="/exercices/{{ $exercice->id }}"  enctype="multipart/form-data">
                                     @method('DELETE')
-                                       @csrf
+                                    @csrf
 
                                     <button type="submit" class="btn btn-primary">Borrar</button>
                                 </form>

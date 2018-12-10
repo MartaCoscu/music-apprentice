@@ -14,17 +14,29 @@
                         </div>
                         @endif
 
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+
+
+
 
                         <form class="form-group" method="POST" action="/exercices"  enctype="multipart/form-data">
                             @csrf
                             <div class = "form-group">
                                 <label for="">Nombre</label>
-                                <input name="name" type="text" class="form-control">
+                                <input name="name" required type="text" class="form-control">
                             </div>
 
                             <div class = "form-group">
                                 <label for="">Resumen</label>
-                                <textarea name="description" class="form-control"></textarea>
+                                <textarea name="description" required class="form-control required"></textarea>
                             </div>
 
 
@@ -44,7 +56,7 @@
 
                             <div class = "form-group">
                                 <label for="">Ejercicio</label>
-                                <textarea name="text" class="form-control"></textarea>
+                                <textarea name="text" required class="form-control"></textarea>
                             </div>
 
                             <div class “form-group”>
@@ -70,7 +82,7 @@
                                     <option value="-1">No añadir</option>
                                     {{ $request->user() }}
                                     @foreach($request->user()->sessions as $session)
-                                          <option value="{{ $session->id }}">{{ $session->name }}</option>
+                                    <option value="{{ $session->id }}">{{ $session->name }}</option>
                                     @endforeach                                    
                                 </select>                         
                             </div>

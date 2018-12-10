@@ -7,6 +7,17 @@
                 <div class="card">
                     <div class="card-header">Dashboard</div>
 
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
                     <div class="card-body">
                         @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -15,12 +26,14 @@
                         @endif
 
 
+
+
                         <form class="form-group" method="POST" action="/sessions"  enctype="multipart/form-data">
                             @csrf
      
                             <div class = "form-group">
                                 <label for="">Nombre</label>
-                                <input name="name" type="text" class="form-control">
+                                <input name="name" type="text" required class="form-control">
                             </div>
 
                             <div class = "form-group">
@@ -30,7 +43,7 @@
 
 
 
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn required btn-primary">Guardar</button>
                         </form>
 
                     </div>
