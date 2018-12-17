@@ -139,6 +139,10 @@ class exerciceController extends Controller
             'name' => 'required',
             'description' => 'required',
             'text' => 'required',
+            'image_file' => 'size:1000',
+            'audio_file' => 'size:4000',
+            'video_file' => 'size:15000',
+
         ]);
 
         $exercice->name = $request->name;
