@@ -49705,6 +49705,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log("swipe left");
         },
         callback: function callback(uno, dos) {
+            alert("hace algo");
             console.log("uno: " + uno);
 
             console.log("dos: " + dos);

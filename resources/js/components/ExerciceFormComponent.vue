@@ -24,6 +24,7 @@
         },
 
         callback(uno, dos){
+            alert("hace algo"); 
             console.log("uno: " + uno); 
 
             console.log("dos: " + dos);
