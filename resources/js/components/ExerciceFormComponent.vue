@@ -1,17 +1,12 @@
 <template>
-    <div class="ma-container">
-      <div>
-        <v-touch @swipeleft="swipeleft()">
-          <p>I can now be swiped on!</p>
-      </v-touch>
-      <v-touch @rotate="rotateAThing">
-          <p>Rotate me!</p>
-      </v-touch>
-  </div>
-</div>
+    <div>
+    <a v-touch:tap="callback">Tap me!</a>
+    <div v-touch:swipe="callback">Swipe me!</div>
+    </div>
 </template>
 
 <script>
+    import { BasicSelect } from 'vue-search-select';
 
     export default {
        data() {
@@ -26,6 +21,12 @@
     methods: {
         swipeleft(){
             console.log("swipe left")
+        },
+
+        callback(uno, dos){
+            console.log("uno: " + uno); 
+
+            console.log("dos: " + dos);
         }
     }
 }

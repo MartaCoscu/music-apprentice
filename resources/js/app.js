@@ -8,8 +8,21 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+require('vue-search-select');
 
+
+
+require('vue2-touch');
+import Vue2Touch from 'vue2-touch';
+
+Vue.use(Vue2Touch, {
+  gestures: ['swipe'],
+  directions: {
+    swipe: ['swipeleft']
+  }
+})
 /**
+
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".

@@ -1,11 +1,11 @@
 <template>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <exercice-component v-for="exercice in exercices" 
+            <exercice v-for="exercice in exercices" 
             :key="exercice.id"
             :exercice = "exercice">
 
-            </exercice-component>
+            </exercice>
         </div>
 
     </div>
