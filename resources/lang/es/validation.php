@@ -131,6 +131,7 @@ return [
         'email'    => [
             'unique' => 'El :attribute ya ha sido registrado.',
         ],
+        'image64' => 'The :attribute must be a file of type: :values.',
     ],
 
     /*

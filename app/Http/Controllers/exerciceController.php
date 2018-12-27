@@ -19,13 +19,16 @@ class exerciceController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+   //     $this->middleware('auth');
     }
 
     public function index(Request $request)
     {
         $exercices = $request->user()->exercices; 
-        return view ('musicapprentice.exercices.exercices', compact(['request', 'exercices'])); 
+        
+        return "index";
+       // return $exercices; 
+         //  return view ('musicapprentice.exercices.exercices', compact(['request', 'exercices'])); 
     }
 
     /**
@@ -38,6 +41,7 @@ class exerciceController extends Controller
 
         $categories = Category::all(); 
 
+return "create";
       //  return $categories;
         return view ('musicapprentice.exercices.create', compact(['categories', 'request'])); 
     }
@@ -50,11 +54,23 @@ class exerciceController extends Controller
      */
     public function store(Request $request)
     {
-
-
-
-
         $exercice = new Exercice(); 
+
+        if ($request -> hasFile('image_file')){
+
+            $file = $request->file('image_file');
+
+            $name = time().$file->getClientOriginalName();
+
+            $file->move(public_path().'/images/', $name);
+
+            $exercice->image = $name;
+      
+        }
+        return "va: ".$request;
+
+
+
         $exercice->name = $request->name;
         $exercice->text = $request->text;
         $exercice->description = $request->description;
@@ -107,6 +123,8 @@ class exerciceController extends Controller
      */
     public function show(Exercice $exercice, Request $request)
     {
+        return "show";
+
         return view('musicapprentice.exercices.show', compact(['request', 'exercice']));
 
     //    return 'show';
@@ -120,6 +138,8 @@ class exerciceController extends Controller
      */
     public function edit(Exercice $exercice, Request $request)
     {
+
+        return "edit";
         $categories = Category::all(); 
         return view('musicapprentice.exercices.edit', compact(['request', 'exercice', 'categories']));
     }
@@ -195,6 +215,8 @@ class exerciceController extends Controller
      */
     public function destroy(Exercice $exercice)
     {
+
+        return "destroy";
         if(!empty($exercice->image)){
             $image_path = public_path().'/images/'.$exercice->image;
             \File::delete($image_path);

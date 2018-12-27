@@ -12,10 +12,15 @@
 */
 
 
-Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/register', 'customAuth@register')->name('Register');
+Route::post('/login', 'customAuth@login')->name('LogIn');
+
+Route::get('/logout', 'customAuth@logout')->name('LogOut');
+Route::get('/loggedin', 'customAuth@loggedin')->name('LoggedIn');
 
 Route::resource('users', 'userController');
 

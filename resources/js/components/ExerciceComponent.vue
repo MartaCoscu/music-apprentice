@@ -3,10 +3,10 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card card-default">
-                    <div class="card-header">Example Component</div>
+                    <div class="card-header">{{ exercice.name }}</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        Holi
                     </div>
                 </div>
             </div>
@@ -16,6 +16,15 @@
 
 <script>
     export default {
+
+        props: ['exercice'],
+
+       data() {
+            return {
+                editMode: false
+            };
+        },
+
         mounted() {
             console.log('Component mounted.')
         }

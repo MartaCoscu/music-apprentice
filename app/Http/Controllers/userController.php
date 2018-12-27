@@ -18,7 +18,7 @@ class userController extends Controller
     {
 
         $user = $request->user();  
-        return $user->sessions()->get(); 
+        return $user;
     }
 
     /**

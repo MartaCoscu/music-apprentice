@@ -16,8 +16,20 @@ window.Vue = require('vue');
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
-
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('navbar', require('./components/NavbarComponent.vue'));
+Vue.component('exercice', require('./components/ExerciceComponent.vue'));
+Vue.component('exercices', require('./components/ExercicesComponent.vue'));
+Vue.component('icons', require('./components/IconsComponent.vue'));
+Vue.component('search', require('./components/SearchComponent.vue'));
+Vue.component('layout', require('./components/LayoutComponent.vue'));
+Vue.component('menuleft', require('./components/MenuLeftComponent.vue'));
+Vue.component('mainsection', require('./components/MainSectionComponent.vue'));
+Vue.component('opcionMenu', require('./components/OpcionMenuComponent.vue'));
+Vue.component('perfilUser', require('./components/PerfilUserComponent.vue'));
+Vue.component('login', require('./components/LoginComponent.vue'));
+Vue.component('singup', require('./components/SingUpComponent.vue'));
+Vue.component('register', require('./components/RegisterComponent.vue'));
+Vue.component('exerciceForm', require('./components/ExerciceFormComponent.vue'));
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))

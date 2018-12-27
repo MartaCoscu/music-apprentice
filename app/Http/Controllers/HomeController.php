@@ -8,15 +8,7 @@ use musicapprentice\Session;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+ 
 
     /**
      * Show the application dashboard.
@@ -27,11 +19,15 @@ class HomeController extends Controller
     {
        // $test = "test";
      //   $user = $request->user; 
-        $exercices = Exercice::where('user_id', '=', $request->user()->id)->simplePaginate(3);
+    /*    $exercices = Exercice::where('user_id', '=', $request->user()->id)->simplePaginate(3);
         $sessions = Session::where('user_id', '=', $request->user()->id)->simplePaginate(3);
 
         return view('home', compact(['request', 'exercices', 'sessions']));
       //  return $request->user();
-  //      return $request->getContent(); 
+  //      return $request->getContent(); */
+
+       // return $request;
+        return view('home');
+
     }
 }

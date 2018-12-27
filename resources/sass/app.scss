@@ -8,7 +8,192 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+
+h1{
+	color: $ma-main;
+	font-weight: bold;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+a{
+	color: $ma-main; 
+}
+
+a:hover{
+	font-weight: bold;
+	color: $ma-main; 
+
+}
+
+
+button{
+	background-color: $ma_main;
+	color: $ma_light;
+	border-color: $ma_light;
+	font-weight: bold;
+}
+.ma-hide-small{
+	@media #{$ma-xs} {
+		display: none;
+	}
+}
+
+.ma-content{
+	@extend .ma-container;
+	display: grid;
+	min-height: 100vh;
+	@media #{$ma-xs} {
+		width: auto; 
+		text-align: center; 
+	}
+	@media #{$ma-s} {
+ 	   grid-template-columns: 300px auto;
+	}
+}
+
+.ma-main-section {
+	background-color: #fff;
+	width: 100%; 
+}
+
+.ma-menu-left{
+	@extend .ma-hide-small;
+	background-color:$ma_light; 
+	width: 300px; 
+}
+
+.ma-navbar{
+  background-color: $ma-main;
+  padding: 1em;
+  color: $ma_light; 
+
+	.ma-search{
+		margin-right: 1em;
+		-webkit-border-radius: 50px;
+		-moz-border-radius: 50px;
+		border-radius: 50px;	
+		padding: 0 1em;
+	}
+}
+
+.ma-container{
+	display: flex;
+	justify-content: space-between;
+	margin: auto; 
+	@media #{$ma-xs} {
+		width: auto; 
+		text-align: center; 
+	}
+	@media #{$ma-s} {
+		width:750px;
+	}
+	@media #{$ma-m} {
+		width: 970px; 
+	}
+	@media #{$ma-l} {
+		width: 1170px; 
+	}
+}
+
+.ma-icons{
+	display: none; 
+	padding:1em;
+	@media #{$ma-xs} {
+		background-color: $ma-light; 
+		display: block;
+		.ma-icons-container{
+			display: flex;
+			justify-content: space-around;
+			max-width: 400px;
+			margin: auto;
+			img{
+
+				display: flex; 
+			}		
+		}
+	}
+}
+
+.ma-name-user{
+	background-color: white; 
+ 	border: 2px solid $ma-main;
+ 	padding: 1em;
+ 	margin-bottom:2em; 
+ 	text-align: center;
+ 	text-transform: uppercase;
+ 	font-weight: bold;
+
+ 	img{
+		padding-right:1em;
+	}
+  }
+
+.ma-opcion{
+	margin-left:2em;
+	padding:1em;
+	font-weight: bold;
+	img{
+		padding-right:1em;
+	}
+}
+
+.ma-user{
+	margin: 5em 0;
+	text-align:center;
+	form{
+		width: 300px;
+		margin: auto;
+		ul{
+			text-align: left;
+ 			list-style-type: none;
+ 			padding: 0;
+ 			input, textarea{
+ 				width: 300px;
+ 			}
+		}
+	}
+
+}
+.ma-user-img{
+	width: 40vw;
+	min-width: 200px;
+	max-width: 300px;
+	margin: auto; 
+	height: auto;
+	padding:2em 0;
+	border-radius: 50%; 
+	display: block;
+}
+
+
+.ma-login, .ma-singup{
+	margin: 3em auto;
+
+	width: 510px; 
+	ul{
+		padding:0;
+		list-style-type: none;		
+		li{
+			width: 100%;
+			margin: 1em auto;
+		}
+	}
+	.ma-label-text{
+		width: 200px;
+	}
+	.ma-input-text{
+		width: 300px;
+	}
+
+	.ma-align-center{
+		text-align: center;
+	}
+	button{
+		margin: auto; 
+	}
+}
+
+.ma-error{
+	color: red; 
 }
