@@ -8,14 +8,16 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-require('vue-search-select');
+require('vue2-touch-events');
+import Vue2TouchEvents from 'vue2-touch-events'
 
-
-
-require('vue2-touch');
-import Vue2Touch from 'vue2-touch';
-
-Vue.use(Vue2Touch); 
+Vue.use(Vue2TouchEvents, {
+    disableClick: false,
+    touchClass: '',
+    tapTolerance: 10,
+    swipeTolerance: 30,
+    longTapTimeInterval: 400
+})
 
 /**
 

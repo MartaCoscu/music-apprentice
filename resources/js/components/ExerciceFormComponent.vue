@@ -1,15 +1,17 @@
 <template>
     <div>
-    <a v-touch:tap="callback">Tap me!</a>
-    <div class="ma-swipe" v-touch:swipe="callback">Swipe me!</div>
+        <!-- bind a tap event -->
+
+<!-- bind the swipe event, no matter direction -->
+<span v-touch:moving="movingHandler">Continuously triggering Event</span>
     </div>
 </template>
 
 <script>
-    import { BasicSelect } from 'vue-search-select';
+import Vue2TouchEvents from 'vue2-touch-events'
 
     export default {
-       data() {
+     data() {
         return {
         };
     },
@@ -23,11 +25,9 @@
             console.log("swipe left")
         },
 
-        callback(uno, dos){
+        movingHandler(uno, dos){
             alert("hace algo"); 
             console.log("uno: " + uno); 
-
-            console.log("dos: " + dos);
         }
     }
 }
