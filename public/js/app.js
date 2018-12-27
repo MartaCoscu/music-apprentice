@@ -14053,12 +14053,8 @@ __webpack_require__(89);
 __webpack_require__(90);
 
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue2_touch__["default"], {
-  gestures: ['swipe'],
-  directions: {
-    swipe: ['swipeleft']
-  }
-});
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue2_touch__["default"]);
+
 /**
 
  * The following block of code may be used to automatically register your
@@ -49749,7 +49745,8 @@ var render = function() {
             expression: "callback",
             arg: "swipe"
           }
-        ]
+        ],
+        staticClass: "ma-swipe"
       },
       [_vm._v("Swipe me!")]
     )

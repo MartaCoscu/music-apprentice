@@ -1,7 +1,7 @@
 <template>
     <div>
     <a v-touch:tap="callback">Tap me!</a>
-    <div v-touch:swipe="callback">Swipe me!</div>
+    <div class="ma-swipe" v-touch:swipe="callback">Swipe me!</div>
     </div>
 </template>
 
