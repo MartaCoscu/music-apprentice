@@ -12,7 +12,6 @@
 </template>
 
 <script>
-    import VueTouch from 'vue-touch';
 
     export default {
        data() {
