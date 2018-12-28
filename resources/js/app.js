@@ -35,6 +35,8 @@ Vue.component('login', require('./components/LoginComponent.vue'));
 Vue.component('singup', require('./components/SingUpComponent.vue'));
 Vue.component('register', require('./components/RegisterComponent.vue'));
 Vue.component('exerciceForm', require('./components/ExerciceFormComponent.vue'));
+Vue.component('exerciceFormDesktop', require('./components/ExerciceFormComponentDesktop.vue'));
+Vue.component('exerciceFormMobile', require('./components/ExerciceFormComponentMobile.vue'));
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))

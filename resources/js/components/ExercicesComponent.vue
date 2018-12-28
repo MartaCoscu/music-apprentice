@@ -1,21 +1,5 @@
 <template>
-    <div>
-
-        <button v-on:click.prevent="next">next</button>
-                <button v-on:click.prevent="prev">prev</button>
-
-    <siema ref="siema" class="siema" :options="options"  @init="initFunc" @change="changeFunc">
-
-            <div class="slide" v-for="exercice in exercices" 
-            :key="exercice.id"
-            :exercice = "exercice">
-            <exercice :exercice = "exercice"></exercice>
-        
-        </div>
-        
-        </siema>
-
-</div>
+<div>exercices</div>
     
 </template>
 
@@ -46,7 +30,12 @@
                     {
                         name: "tres"
                     },
-                ]
+                ],
+                window: {
+                    width: 0,
+                    height: 0,
+                    mobile: false
+                }
             }
         },
 
@@ -60,8 +49,15 @@
 
             console.log('Component mounted.')
         },
+        created() {
+            window.addEventListener('resize', this.handleResize)
+            this.handleResize();
+        },
+        destroyed() {
+            window.removeEventListener('resize', this.handleResize)
+        },
 
-          methods: {
+        methods: {
             initFunc(){
                 console.log("init"); 
             },
@@ -78,6 +74,16 @@
             prev(){
                 console.log("next"); 
                 this.$refs.siema.prev();
+            },
+
+            handleResize() {
+                this.window.width = window.innerWidth;
+                this.window.height = window.innerHeight;
+                if (this.window.width > 992){
+                    this.window.greater = true; 
+                }else {
+                    this.window.greater = false; 
+                }
             }        
         }
     }

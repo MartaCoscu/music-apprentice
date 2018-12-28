@@ -2,6 +2,7 @@
     <div class="ma-main-section">
     	<perfilUser></perfilUser>
     	<exercices></exercices>
+    	<exerciceForm></exerciceForm>
     </div>
 </template>
 

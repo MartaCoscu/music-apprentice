@@ -10649,9 +10649,8 @@ button {
   width: 300px;
 }
 
-.ma-user-img {
+.ma-user-pic {
   width: 40vw;
-  min-width: 200px;
   max-width: 300px;
   margin: auto;
   height: auto;
