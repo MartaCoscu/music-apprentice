@@ -14037,8 +14037,7 @@ module.exports = __webpack_require__(79);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_touch_events__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_touch_events___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_touch_events__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_siema__ = __webpack_require__(94);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -14049,16 +14048,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __webpack_require__(14);
 
 window.Vue = __webpack_require__(37);
-__webpack_require__(92);
+__webpack_require__(94);
 
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue2_touch_events___default.a, {
-  disableClick: false,
-  touchClass: '',
-  tapTolerance: 10,
-  swipeTolerance: 30,
-  longTapTimeInterval: 400
-});
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue2_siema__["default"]);
 
 /**
 
@@ -47657,12 +47650,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -47686,19 +47673,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v(_vm._s(_vm.exercice.name))
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v("\n                    Holi\n                ")
-          ])
-        ])
-      ])
+  return _c("div", [
+    _c("div", [
+      _vm._v(
+        "\n                    Holi " +
+          _vm._s(_vm.exercice.name) +
+          " adios\n            "
+      )
     ])
   ])
 }
@@ -47778,21 +47759,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            exercices: []
+            options: {
+                duration: 200,
+                easing: 'ease-out',
+                perPage: 1,
+                startIndex: 0,
+                draggable: true,
+                multipleDrag: true,
+                threshold: 20,
+                loop: false,
+                rtl: false
+            },
+
+            exercices: [{
+                name: "uno"
+            }, {
+                name: "dos"
+            }, {
+                name: "tres"
+            }]
         };
     },
     mounted: function mounted() {
-        var _this = this;
-
-        axios.get('/exercices').then(function (response) {
-            _this.exercices = response.data;
-        });
+        /*      axios.get('/exercices').then((response) => {
+                  this.exercices = response.data;
+                  console.log("exercices: " + this.exercices); 
+              });*/
 
         console.log('Component mounted.');
+    },
+
+
+    methods: {
+        initFunc: function initFunc() {
+            console.log("init");
+        },
+        changeFunc: function changeFunc() {
+            console.log("change");
+        },
+        next: function next() {
+            console.log("next");
+            this.$refs.siema.next();
+        },
+        prev: function prev() {
+            console.log("next");
+            this.$refs.siema.prev();
+        }
     }
 });
 
@@ -47804,19 +47828,60 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c(
-      "div",
-      { staticClass: "col-md-8 col-md-offset-2" },
-      _vm._l(_vm.exercices, function(exercice) {
-        return _c("exercice", {
-          key: exercice.id,
-          attrs: { exercice: exercice }
-        })
-      }),
-      1
-    )
-  ])
+  return _c(
+    "div",
+    [
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.next($event)
+            }
+          }
+        },
+        [_vm._v("next")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.prev($event)
+            }
+          }
+        },
+        [_vm._v("prev")]
+      ),
+      _vm._v(" "),
+      _c(
+        "siema",
+        {
+          ref: "siema",
+          staticClass: "siema",
+          attrs: { options: _vm.options },
+          on: { init: _vm.initFunc, change: _vm.changeFunc }
+        },
+        _vm._l(_vm.exercices, function(exercice) {
+          return _c(
+            "div",
+            {
+              key: exercice.id,
+              staticClass: "slide",
+              attrs: { exercice: exercice }
+            },
+            [_c("exercice", { attrs: { exercice: exercice } })],
+            1
+          )
+        }),
+        0
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -48372,7 +48437,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -48391,13 +48455,7 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "ma-main-section" },
-    [
-      _c("perfilUser"),
-      _vm._v(" "),
-      _c("exercices"),
-      _vm._v(" "),
-      _c("exerciceForm")
-    ],
+    [_c("perfilUser"), _vm._v(" "), _c("exercices")],
     1
   )
 }
@@ -49680,18 +49738,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_touch_events__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_touch_events___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_touch_events__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -49703,15 +49752,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
 
-    methods: {
-        swipeleft: function swipeleft() {
-            console.log("swipe left");
-        },
-        movingHandler: function movingHandler(uno, dos) {
-            alert("hace algo");
-            console.log("uno: " + uno);
-        }
-    }
+    methods: {}
 });
 
 /***/ }),
@@ -49722,23 +49763,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "span",
-      {
-        directives: [
-          {
-            name: "touch",
-            rawName: "v-touch:moving",
-            value: _vm.movingHandler,
-            expression: "movingHandler",
-            arg: "moving"
-          }
-        ]
-      },
-      [_vm._v("Continuously triggering Event")]
-    )
-  ])
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -49756,307 +49781,266 @@ if (false) {
 /* 89 */,
 /* 90 */,
 /* 91 */,
-/* 92 */
+/* 92 */,
+/* 93 */,
+/* 94 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Siema", function() { return Siema$1; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_siema__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_siema___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_siema__);
+
+
+//
+
+var script = {
+  props: {
+    options: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    autoPlay: {
+      type: Boolean,
+      default: false
+    },
+    playDuration: {
+      type: Number,
+      default: 6000
+    },
+    current: {
+      type: Number,
+      default: 0
+    },
+    ready: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data: function data() {
+    return {
+      playing: this.autoPlay,
+      time: this.playDuration
+    };
+  },
+  mounted: function mounted() {
+    if (this.ready) this.init();
+  },
+  beforeDestroy: function beforeDestroy() {
+    if (this.playing) clearInterval(this.$options.play_timer);
+    this.destroy();
+  },
+
+  methods: {
+    init: function init() {
+      var _this = this;
+
+      this.$nextTick(function () {
+        if (_this.options === undefined) _this.options = {};
+        _this.options.selector = _this.$el;
+        _this.options.onInit = function () {
+          _this.$emit('init');
+        };
+        _this.options.onChange = function () {
+          _this.$emit('update:current', _this.siema.currentSlide);
+          if (_this.playing) {
+            clearTimeout(_this.$options.play_timer);
+            _this.$options.play_timer = setTimeout(function () {
+              _this.siema.next();
+            }, _this.time);
+          }
+          _this.$emit('change');
+        };
+        if (_this.playing) _this.play(_this.time);
+        _this.siema = new __WEBPACK_IMPORTED_MODULE_0_siema___default.a(_this.options);
+      });
+    },
+
+    // Basic wrap...
+    prev: function prev(slide, callback) {
+      this.siema.prev(slide, callback);
+    },
+    next: function next(slide, callback) {
+      this.siema.next(slide, callback);
+    },
+    goTo: function goTo(index, callback) {
+      this.siema.goTo(index, callback);
+    },
+    remove: function remove(index, callback) {
+      this.siema.remove(index, callback);
+    },
+    insert: function insert(item, index, callback) {
+      this.siema.insert(item, index, callback);
+    },
+    prepend: function prepend(item, callback) {
+      this.siema.prepend(item, callback);
+    },
+    append: function append(item, callback) {
+      this.siema.append(item, callback);
+    },
+    destroy: function destroy() {
+      var restoreMarkup = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var callback = arguments[1];
+
+      this.siema.destroy(restoreMarkup, callback);
+    },
+    play: function play() {
+      var _this2 = this;
+
+      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 6000;
+
+      this.time = time;
+      this.playing = true;
+      this.$options.play_timer = setTimeout(function () {
+        _this2.siema.next();
+      }, time);
+      this.$emit('update:playing', true);
+    },
+    stop: function stop() {
+      this.playing = false;
+      clearTimeout(this.$options.play_timer);
+      this.$emit('update:playing', false);
+    }
+  }
+};
+
+var __vue_script__ = script;
+
+/* template */
+var __vue_render__ = function __vue_render__() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", [_vm._t("default")], 2);
+};
+var __vue_staticRenderFns__ = [];
+__vue_render__._withStripped = true;
+
+var __vue_template__ = typeof __vue_render__ !== 'undefined' ? { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ } : {};
+/* style */
+var __vue_inject_styles__ = undefined;
+/* scoped */
+var __vue_scope_id__ = undefined;
+/* module identifier */
+var __vue_module_identifier__ = undefined;
+/* functional template */
+var __vue_is_functional_template__ = false;
+/* component normalizer */
+function __vue_normalize__(template, style, script$$1, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
+  var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
+
+  {
+    component.__file = "/srv/core/vue2-siema/src/components/siema.vue";
+  }
+
+  if (!component.render) {
+    component.render = template.render;
+    component.staticRenderFns = template.staticRenderFns;
+    component._compiled = true;
+
+    if (functional) component.functional = true;
+  }
+
+  component._scopeId = scope;
+
+  return component;
+}
+/* style inject */
+function __vue_create_injector__() {
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var styles = __vue_create_injector__.styles || (__vue_create_injector__.styles = {});
+  var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+
+  return function addStyle(id, css) {
+    if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
+
+    var group = isOldIE ? css.media || 'default' : id;
+    var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
+
+    if (!style.ids.includes(id)) {
+      var code = css.source;
+      var index = style.ids.length;
+
+      style.ids.push(id);
+
+      if (isOldIE) {
+        style.element = style.element || document.querySelector('style[data-group=' + group + ']');
+      }
+
+      if (!style.element) {
+        var el = style.element = document.createElement('style');
+        el.type = 'text/css';
+
+        if (css.media) el.setAttribute('media', css.media);
+        if (isOldIE) {
+          el.setAttribute('data-group', group);
+          el.setAttribute('data-next-index', '0');
+        }
+
+        head.appendChild(el);
+      }
+
+      if (isOldIE) {
+        index = parseInt(style.element.getAttribute('data-next-index'));
+        style.element.setAttribute('data-next-index', index + 1);
+      }
+
+      if (style.element.styleSheet) {
+        style.parts.push(code);
+        style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
+      } else {
+        var textNode = document.createTextNode(code);
+        var nodes = style.element.childNodes;
+        if (nodes[index]) style.element.removeChild(nodes[index]);
+        if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
+      }
+    }
+  };
+}
+/* style inject SSR */
+
+var Siema$1 = __vue_normalize__(__vue_template__, __vue_inject_styles__, typeof __vue_script__ === 'undefined' ? {} : __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, typeof __vue_create_injector__ !== 'undefined' ? __vue_create_injector__ : function () {}, typeof __vue_create_injector_ssr__ !== 'undefined' ? __vue_create_injector_ssr__ : function () {});
+
+// Install the components
+function install(Vue) {
+  Vue.component('siema', Siema$1);
+}
+
+/* -- Plugin definition & Auto-install -- */
+/* You shouldn't have to modify the code below */
+
+// Plugin
+var plugin = {
+  // eslint-disable-next-line no-undef
+  version: "0.2.2",
+  install: install
+};
+
+// Auto-install
+var GlobalVue = null;
+if (typeof window !== 'undefined') {
+  GlobalVue = window.Vue;
+} else if (typeof global !== 'undefined') {
+  GlobalVue = global.Vue;
+}
+if (GlobalVue) {
+  GlobalVue.use(plugin);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (plugin);
+
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
+
+/***/ }),
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/**
- *
- * @author    Jerry Bendy
- * @since     4/12/2017
- */
-
-function touchX(event) {
-    return event.touches[0].clientX;
-}
-
-function touchY(event) {
-    return event.touches[0].clientY;
-}
-
-var isPassiveSupported = (function() {
-    var supportsPassive = false;
-    try {
-        var opts = Object.defineProperty({}, 'passive', {
-            get: function() {
-                supportsPassive = true;
-            }
-        });
-        window.addEventListener('test', null, opts);
-    } catch (e) {}
-    return supportsPassive;
-})()
-
-
-var vueTouchEvents = {
-    install: function (Vue, options) {
-
-        // Set default options
-        options = Object.assign({}, {
-            disableClick: false,
-            tapTolerance: 10,
-            swipeTolerance: 30,
-            longTapTimeInterval: 400,
-            touchClass: ''
-        }, options || {})
-
-
-        function touchStartEvent(event) {
-            var $this = this.$$touchObj
-
-            $this.supportTouch = true
-
-            if ($this.touchStarted) {
-                return
-            }
-
-            addTouchClass(this)
-
-            $this.touchStarted = true
-
-            $this.touchMoved = false
-            $this.swipeOutBounded = false
-
-            $this.startX = touchX(event)
-            $this.startY = touchY(event)
-
-            $this.currentX = 0
-            $this.currentY = 0
-
-            $this.touchStartTime = event.timeStamp
-        }
-
-        function touchMoveEvent(event) {
-            var $this = this.$$touchObj
-
-            $this.currentX = touchX(event)
-            $this.currentY = touchY(event)
-
-            if (!$this.touchMoved) {
-                var tapTolerance = options.tapTolerance
-
-                $this.touchMoved = Math.abs($this.startX - $this.currentX) > tapTolerance ||
-                    Math.abs($this.startY - $this.currentY) > tapTolerance
-
-            } else if (!$this.swipeOutBounded) {
-                var swipeOutBounded = options.swipeTolerance
-
-                $this.swipeOutBounded = Math.abs($this.startX - $this.currentX) > swipeOutBounded &&
-                    Math.abs($this.startY - $this.currentY) > swipeOutBounded
-            }
-        }
-
-        function touchCancelEvent() {
-            var $this = this.$$touchObj
-
-            removeTouchClass(this)
-
-            $this.touchStarted = $this.touchMoved = false
-            $this.startX = $this.startY = 0
-        }
-
-        function touchEndEvent(event) {
-            var $this = this.$$touchObj
-
-            $this.touchStarted = false
-
-            removeTouchClass(this)
-
-            if (!$this.touchMoved) {
-                // detect if this is a longTap event or not
-                if ($this.callbacks.longtap && event.timeStamp - $this.touchStartTime > options.longTapTimeInterval) {
-                    event.preventDefault()
-                    triggerEvent(event, this, 'longtap')
-
-                } else {
-                    // emit tap event
-                    triggerEvent(event, this, 'tap')
-                }
-
-            } else if (!$this.swipeOutBounded) {
-                var swipeOutBounded = options.swipeTolerance, direction
-
-                if (Math.abs($this.startX - $this.currentX) < swipeOutBounded) {
-                    direction = $this.startY > $this.currentY ? "top" : "bottom"
-
-                } else {
-                    direction = $this.startX > $this.currentX ? "left" : "right"
-                }
-
-                // Only emit the specified event when it has modifiers
-                if ($this.callbacks['swipe.' + direction]) {
-                    triggerEvent(event, this, 'swipe.' + direction, direction)
-
-                } else {
-                    // Emit a common event when it has no any modifier
-                    triggerEvent(event, this, 'swipe', direction)
-                }
-            }
-        }
-
-        function clickEvent(event) {
-            var $this = this.$$touchObj
-
-            if (!$this.supportTouch && !options.disableClick) {
-                triggerEvent(event, this, 'tap')
-            }
-        }
-
-        function mouseEnterEvent() {
-            addTouchClass(this)
-        }
-
-        function mouseLeaveEvent() {
-            removeTouchClass(this)
-        }
-
-        function triggerEvent(e, $el, eventType, param) {
-            var $this = $el.$$touchObj
-
-            // get the callback list
-            var callbacks = $this.callbacks[eventType] || []
-            if (callbacks.length === 0) {
-                return null
-            }
-
-            for (var i = 0; i < callbacks.length; i++) {
-                var binding = callbacks[i]
-
-                if (binding.modifiers.stop) {
-                    e.stopPropagation();
-                }
-
-                if (binding.modifiers.prevent) {
-                    e.preventDefault();
-                }
-
-                // handle `self` modifier`
-                if (binding.modifiers.self && e.target !== e.currentTarget) {
-                    continue
-                }
-
-                if (typeof binding.value === 'function') {
-                    if (param) {
-                        binding.value(param, e)
-                    } else {
-                        binding.value(e)
-                    }
-                }
-            }
-        }
-
-        function addTouchClass($el) {
-            var className = $el.$$touchClass || options.touchClass
-            className && $el.classList.add(className)
-        }
-
-        function removeTouchClass($el) {
-            var className = $el.$$touchClass || options.touchClass
-            className && $el.classList.remove(className)
-        }
-
-        Vue.directive('touch', {
-            bind: function ($el, binding) {
-
-                $el.$$touchObj = $el.$$touchObj || {
-                        // will change to true when `touchstart` event first trigger
-                        supportTouch: false,
-                        // an object contains all callbacks registered,
-                        // key is event name, value is an array
-                        callbacks: {},
-                        // prevent bind twice, set to true when event bound
-                        hasBindTouchEvents: false
-                    }
-
-
-                // register callback
-                var eventType = binding.arg || 'tap'
-                switch (eventType) {
-                    case 'swipe':
-                        var _m = binding.modifiers
-                        if (_m.left || _m.right || _m.top || _m.bottom) {
-                            for (var i in binding.modifiers) {
-                                if (['left', 'right', 'top', 'bottom'].indexOf(i) >= 0) {
-                                    var _e = 'swipe.' + i
-                                    $el.$$touchObj.callbacks[_e] = $el.$$touchObj.callbacks[_e] || []
-                                    $el.$$touchObj.callbacks[_e].push(binding)
-                                }
-                            }
-                        } else {
-                            $el.$$touchObj.callbacks.swipe = $el.$$touchObj.callbacks.swipe || []
-                            $el.$$touchObj.callbacks.swipe.push(binding)
-                        }
-                        break
-
-                    default:
-                        $el.$$touchObj.callbacks[eventType] = $el.$$touchObj.callbacks[eventType] || []
-                        $el.$$touchObj.callbacks[eventType].push(binding)
-                }
-
-                // prevent bind twice
-                if ($el.$$touchObj.hasBindTouchEvents) {
-                    return
-                }
-
-                var passiveOpt = isPassiveSupported ? { passive: true } : false;
-                $el.addEventListener('touchstart', touchStartEvent, passiveOpt)
-                $el.addEventListener('touchmove', touchMoveEvent, passiveOpt)
-                $el.addEventListener('touchcancel', touchCancelEvent)
-                $el.addEventListener('touchend', touchEndEvent)
-
-                if (!options.disableClick) {
-                    $el.addEventListener('click', clickEvent)
-                    $el.addEventListener('mouseenter', mouseEnterEvent)
-                    $el.addEventListener('mouseleave', mouseLeaveEvent)
-                }
-
-                // set bind mark to true
-                $el.$$touchObj.hasBindTouchEvents = true
-            },
-
-            unbind: function ($el) {
-                $el.removeEventListener('touchstart', touchStartEvent)
-                $el.removeEventListener('touchmove', touchMoveEvent)
-                $el.removeEventListener('touchcancel', touchCancelEvent)
-                $el.removeEventListener('touchend', touchEndEvent)
-
-                if (!options.disableClick) {
-                    $el.removeEventListener('click', clickEvent)
-                    $el.removeEventListener('mouseenter', mouseEnterEvent)
-                    $el.removeEventListener('mouseleave', mouseLeaveEvent)
-                }
-
-                // remove vars
-                delete $el.$$touchObj
-            }
-        })
-
-        Vue.directive('touch-class', {
-            bind: function ($el, binding) {
-                $el.$$touchClass = binding.value
-            },
-            unbind: function ($el) {
-                delete $el.$$touchClass
-            }
-        })
-    }
-}
-
-
-/*
- * Exports
- */
-if (true) {
-    module.exports = vueTouchEvents
-
-} else if (typeof define === 'function' && define.amd) {
-    define([], function () {
-        return vueTouchEvents
-    })
-} else if (window.Vue) {
-    window.vueTouchEvents = vueTouchEvents
-    Vue.use(vueTouchEvents)
-}
-
+!function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define("Siema",[],t):"object"==typeof exports?exports.Siema=t():e.Siema=t()}("undefined"!=typeof self?self:this,function(){return function(e){function t(r){if(i[r])return i[r].exports;var n=i[r]={i:r,l:!1,exports:{}};return e[r].call(n.exports,n,n.exports,t),n.l=!0,n.exports}var i={};return t.m=e,t.c=i,t.d=function(e,i,r){t.o(e,i)||Object.defineProperty(e,i,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var i=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(i,"a",i),i},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=0)}([function(e,t,i){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(t,"__esModule",{value:!0});var n="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},s=function(){function e(e,t){for(var i=0;i<t.length;i++){var r=t[i];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,i,r){return i&&e(t.prototype,i),r&&e(t,r),t}}(),l=function(){function e(t){var i=this;if(r(this,e),this.config=e.mergeSettings(t),this.selector="string"==typeof this.config.selector?document.querySelector(this.config.selector):this.config.selector,null===this.selector)throw new Error("Something wrong with your selector 😭");this.resolveSlidesNumber(),this.selectorWidth=this.selector.offsetWidth,this.innerElements=[].slice.call(this.selector.children),this.currentSlide=this.config.loop?this.config.startIndex%this.innerElements.length:Math.max(0,Math.min(this.config.startIndex,this.innerElements.length-this.perPage)),this.transformProperty=e.webkitOrNot(),["resizeHandler","touchstartHandler","touchendHandler","touchmoveHandler","mousedownHandler","mouseupHandler","mouseleaveHandler","mousemoveHandler","clickHandler"].forEach(function(e){i[e]=i[e].bind(i)}),this.init()}return s(e,[{key:"attachEvents",value:function(){window.addEventListener("resize",this.resizeHandler),this.config.draggable&&(this.pointerDown=!1,this.drag={startX:0,endX:0,startY:0,letItGo:null,preventClick:!1},this.selector.addEventListener("touchstart",this.touchstartHandler),this.selector.addEventListener("touchend",this.touchendHandler),this.selector.addEventListener("touchmove",this.touchmoveHandler),this.selector.addEventListener("mousedown",this.mousedownHandler),this.selector.addEventListener("mouseup",this.mouseupHandler),this.selector.addEventListener("mouseleave",this.mouseleaveHandler),this.selector.addEventListener("mousemove",this.mousemoveHandler),this.selector.addEventListener("click",this.clickHandler))}},{key:"detachEvents",value:function(){window.removeEventListener("resize",this.resizeHandler),this.selector.removeEventListener("touchstart",this.touchstartHandler),this.selector.removeEventListener("touchend",this.touchendHandler),this.selector.removeEventListener("touchmove",this.touchmoveHandler),this.selector.removeEventListener("mousedown",this.mousedownHandler),this.selector.removeEventListener("mouseup",this.mouseupHandler),this.selector.removeEventListener("mouseleave",this.mouseleaveHandler),this.selector.removeEventListener("mousemove",this.mousemoveHandler),this.selector.removeEventListener("click",this.clickHandler)}},{key:"init",value:function(){this.attachEvents(),this.selector.style.overflow="hidden",this.selector.style.direction=this.config.rtl?"rtl":"ltr",this.buildSliderFrame(),this.config.onInit.call(this)}},{key:"buildSliderFrame",value:function(){var e=this.selectorWidth/this.perPage,t=this.config.loop?this.innerElements.length+2*this.perPage:this.innerElements.length;this.sliderFrame=document.createElement("div"),this.sliderFrame.style.width=e*t+"px",this.enableTransition(),this.config.draggable&&(this.selector.style.cursor="-webkit-grab");var i=document.createDocumentFragment();if(this.config.loop)for(var r=this.innerElements.length-this.perPage;r<this.innerElements.length;r++){var n=this.buildSliderFrameItem(this.innerElements[r].cloneNode(!0));i.appendChild(n)}for(var s=0;s<this.innerElements.length;s++){var l=this.buildSliderFrameItem(this.innerElements[s]);i.appendChild(l)}if(this.config.loop)for(var o=0;o<this.perPage;o++){var a=this.buildSliderFrameItem(this.innerElements[o].cloneNode(!0));i.appendChild(a)}this.sliderFrame.appendChild(i),this.selector.innerHTML="",this.selector.appendChild(this.sliderFrame),this.slideToCurrent()}},{key:"buildSliderFrameItem",value:function(e){var t=document.createElement("div");return t.style.cssFloat=this.config.rtl?"right":"left",t.style.float=this.config.rtl?"right":"left",t.style.width=(this.config.loop?100/(this.innerElements.length+2*this.perPage):100/this.innerElements.length)+"%",t.appendChild(e),t}},{key:"resolveSlidesNumber",value:function(){if("number"==typeof this.config.perPage)this.perPage=this.config.perPage;else if("object"===n(this.config.perPage)){this.perPage=1;for(var e in this.config.perPage)window.innerWidth>=e&&(this.perPage=this.config.perPage[e])}}},{key:"prev",value:function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:1,t=arguments[1];if(!(this.innerElements.length<=this.perPage)){var i=this.currentSlide;if(this.config.loop){if(this.currentSlide-e<0){this.disableTransition();var r=this.currentSlide+this.innerElements.length,n=this.perPage,s=r+n,l=(this.config.rtl?1:-1)*s*(this.selectorWidth/this.perPage),o=this.config.draggable?this.drag.endX-this.drag.startX:0;this.sliderFrame.style[this.transformProperty]="translate3d("+(l+o)+"px, 0, 0)",this.currentSlide=r-e}else this.currentSlide=this.currentSlide-e}else this.currentSlide=Math.max(this.currentSlide-e,0);i!==this.currentSlide&&(this.slideToCurrent(this.config.loop),this.config.onChange.call(this),t&&t.call(this))}}},{key:"next",value:function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:1,t=arguments[1];if(!(this.innerElements.length<=this.perPage)){var i=this.currentSlide;if(this.config.loop){if(this.currentSlide+e>this.innerElements.length-this.perPage){this.disableTransition();var r=this.currentSlide-this.innerElements.length,n=this.perPage,s=r+n,l=(this.config.rtl?1:-1)*s*(this.selectorWidth/this.perPage),o=this.config.draggable?this.drag.endX-this.drag.startX:0;this.sliderFrame.style[this.transformProperty]="translate3d("+(l+o)+"px, 0, 0)",this.currentSlide=r+e}else this.currentSlide=this.currentSlide+e}else this.currentSlide=Math.min(this.currentSlide+e,this.innerElements.length-this.perPage);i!==this.currentSlide&&(this.slideToCurrent(this.config.loop),this.config.onChange.call(this),t&&t.call(this))}}},{key:"disableTransition",value:function(){this.sliderFrame.style.webkitTransition="all 0ms "+this.config.easing,this.sliderFrame.style.transition="all 0ms "+this.config.easing}},{key:"enableTransition",value:function(){this.sliderFrame.style.webkitTransition="all "+this.config.duration+"ms "+this.config.easing,this.sliderFrame.style.transition="all "+this.config.duration+"ms "+this.config.easing}},{key:"goTo",value:function(e,t){if(!(this.innerElements.length<=this.perPage)){var i=this.currentSlide;this.currentSlide=this.config.loop?e%this.innerElements.length:Math.min(Math.max(e,0),this.innerElements.length-this.perPage),i!==this.currentSlide&&(this.slideToCurrent(),this.config.onChange.call(this),t&&t.call(this))}}},{key:"slideToCurrent",value:function(e){var t=this,i=this.config.loop?this.currentSlide+this.perPage:this.currentSlide,r=(this.config.rtl?1:-1)*i*(this.selectorWidth/this.perPage);e?requestAnimationFrame(function(){requestAnimationFrame(function(){t.enableTransition(),t.sliderFrame.style[t.transformProperty]="translate3d("+r+"px, 0, 0)"})}):this.sliderFrame.style[this.transformProperty]="translate3d("+r+"px, 0, 0)"}},{key:"updateAfterDrag",value:function(){var e=(this.config.rtl?-1:1)*(this.drag.endX-this.drag.startX),t=Math.abs(e),i=this.config.multipleDrag?Math.ceil(t/(this.selectorWidth/this.perPage)):1,r=e>0&&this.currentSlide-i<0,n=e<0&&this.currentSlide+i>this.innerElements.length-this.perPage;e>0&&t>this.config.threshold&&this.innerElements.length>this.perPage?this.prev(i):e<0&&t>this.config.threshold&&this.innerElements.length>this.perPage&&this.next(i),this.slideToCurrent(r||n)}},{key:"resizeHandler",value:function(){this.resolveSlidesNumber(),this.currentSlide+this.perPage>this.innerElements.length&&(this.currentSlide=this.innerElements.length<=this.perPage?0:this.innerElements.length-this.perPage),this.selectorWidth=this.selector.offsetWidth,this.buildSliderFrame()}},{key:"clearDrag",value:function(){this.drag={startX:0,endX:0,startY:0,letItGo:null,preventClick:this.drag.preventClick}}},{key:"touchstartHandler",value:function(e){-1!==["TEXTAREA","OPTION","INPUT","SELECT"].indexOf(e.target.nodeName)||(e.stopPropagation(),this.pointerDown=!0,this.drag.startX=e.touches[0].pageX,this.drag.startY=e.touches[0].pageY)}},{key:"touchendHandler",value:function(e){e.stopPropagation(),this.pointerDown=!1,this.enableTransition(),this.drag.endX&&this.updateAfterDrag(),this.clearDrag()}},{key:"touchmoveHandler",value:function(e){if(e.stopPropagation(),null===this.drag.letItGo&&(this.drag.letItGo=Math.abs(this.drag.startY-e.touches[0].pageY)<Math.abs(this.drag.startX-e.touches[0].pageX)),this.pointerDown&&this.drag.letItGo){e.preventDefault(),this.drag.endX=e.touches[0].pageX,this.sliderFrame.style.webkitTransition="all 0ms "+this.config.easing,this.sliderFrame.style.transition="all 0ms "+this.config.easing;var t=this.config.loop?this.currentSlide+this.perPage:this.currentSlide,i=t*(this.selectorWidth/this.perPage),r=this.drag.endX-this.drag.startX,n=this.config.rtl?i+r:i-r;this.sliderFrame.style[this.transformProperty]="translate3d("+(this.config.rtl?1:-1)*n+"px, 0, 0)"}}},{key:"mousedownHandler",value:function(e){-1!==["TEXTAREA","OPTION","INPUT","SELECT"].indexOf(e.target.nodeName)||(e.preventDefault(),e.stopPropagation(),this.pointerDown=!0,this.drag.startX=e.pageX)}},{key:"mouseupHandler",value:function(e){e.stopPropagation(),this.pointerDown=!1,this.selector.style.cursor="-webkit-grab",this.enableTransition(),this.drag.endX&&this.updateAfterDrag(),this.clearDrag()}},{key:"mousemoveHandler",value:function(e){if(e.preventDefault(),this.pointerDown){"A"===e.target.nodeName&&(this.drag.preventClick=!0),this.drag.endX=e.pageX,this.selector.style.cursor="-webkit-grabbing",this.sliderFrame.style.webkitTransition="all 0ms "+this.config.easing,this.sliderFrame.style.transition="all 0ms "+this.config.easing;var t=this.config.loop?this.currentSlide+this.perPage:this.currentSlide,i=t*(this.selectorWidth/this.perPage),r=this.drag.endX-this.drag.startX,n=this.config.rtl?i+r:i-r;this.sliderFrame.style[this.transformProperty]="translate3d("+(this.config.rtl?1:-1)*n+"px, 0, 0)"}}},{key:"mouseleaveHandler",value:function(e){this.pointerDown&&(this.pointerDown=!1,this.selector.style.cursor="-webkit-grab",this.drag.endX=e.pageX,this.drag.preventClick=!1,this.enableTransition(),this.updateAfterDrag(),this.clearDrag())}},{key:"clickHandler",value:function(e){this.drag.preventClick&&e.preventDefault(),this.drag.preventClick=!1}},{key:"remove",value:function(e,t){if(e<0||e>=this.innerElements.length)throw new Error("Item to remove doesn't exist 😭");var i=e<this.currentSlide,r=this.currentSlide+this.perPage-1===e;(i||r)&&this.currentSlide--,this.innerElements.splice(e,1),this.buildSliderFrame(),t&&t.call(this)}},{key:"insert",value:function(e,t,i){if(t<0||t>this.innerElements.length+1)throw new Error("Unable to inset it at this index 😭");if(-1!==this.innerElements.indexOf(e))throw new Error("The same item in a carousel? Really? Nope 😭");var r=t<=this.currentSlide>0&&this.innerElements.length;this.currentSlide=r?this.currentSlide+1:this.currentSlide,this.innerElements.splice(t,0,e),this.buildSliderFrame(),i&&i.call(this)}},{key:"prepend",value:function(e,t){this.insert(e,0),t&&t.call(this)}},{key:"append",value:function(e,t){this.insert(e,this.innerElements.length+1),t&&t.call(this)}},{key:"destroy",value:function(){var e=arguments.length>0&&void 0!==arguments[0]&&arguments[0],t=arguments[1];if(this.detachEvents(),this.selector.style.cursor="auto",e){for(var i=document.createDocumentFragment(),r=0;r<this.innerElements.length;r++)i.appendChild(this.innerElements[r]);this.selector.innerHTML="",this.selector.appendChild(i),this.selector.removeAttribute("style")}t&&t.call(this)}}],[{key:"mergeSettings",value:function(e){var t={selector:".siema",duration:200,easing:"ease-out",perPage:1,startIndex:0,draggable:!0,multipleDrag:!0,threshold:20,loop:!1,rtl:!1,onInit:function(){},onChange:function(){}},i=e;for(var r in i)t[r]=i[r];return t}},{key:"webkitOrNot",value:function(){return"string"==typeof document.documentElement.style.transform?"transform":"WebkitTransform"}}]),e}();t.default=l,e.exports=t.default}])});
 
 /***/ })
 /******/ ]);

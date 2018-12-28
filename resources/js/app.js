@@ -8,16 +8,10 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-require('vue2-touch-events');
-import Vue2TouchEvents from 'vue2-touch-events'
+require('vue2-siema'); 
+import Siema from 'vue2-siema'
 
-Vue.use(Vue2TouchEvents, {
-    disableClick: false,
-    touchClass: '',
-    tapTolerance: 10,
-    swipeTolerance: 30,
-    longTapTimeInterval: 400
-})
+Vue.use(Siema)
 
 /**
 
