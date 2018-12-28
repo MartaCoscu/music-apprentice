@@ -1,8 +1,7 @@
 <template>
     <div>
 
-                <div>
-                        Holi {{ exercice.name }} adios
+                <div v-html="exercice.description">
                 </div>
           
     </div>

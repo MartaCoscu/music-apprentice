@@ -26,9 +26,8 @@ class exerciceController extends Controller
     {
         $exercices = $request->user()->exercices; 
         
-        return "index";
-       // return $exercices; 
-         //  return view ('musicapprentice.exercices.exercices', compact(['request', 'exercices'])); 
+       // return "index";
+        return $exercices; 
     }
 
     /**
@@ -41,7 +40,6 @@ class exerciceController extends Controller
 
         $categories = Category::all(); 
 
-return "create";
       //  return $categories;
         return view ('musicapprentice.exercices.create', compact(['categories', 'request'])); 
     }
@@ -54,6 +52,7 @@ return "create";
      */
     public function store(Request $request)
     {
+
         $exercice = new Exercice(); 
 
         if ($request -> hasFile('image_file')){
@@ -67,8 +66,6 @@ return "create";
             $exercice->image = $name;
       
         }
-        return "va: ".$request;
-
 
 
         $exercice->name = $request->name;
@@ -77,7 +74,6 @@ return "create";
 
         $exercice->user_id = $request->user()->id; 
         $exercice->categoria_id = $request->categoria_id; 
-
 
         if ($request -> hasFile('image_file')){
             $file = $request->file('image_file'); 
@@ -103,13 +99,16 @@ return "create";
             $exercice->audio = $name;
         }   
 
+
         $exercice->save();
+             
         if ($request->session_id != -1){
             $session = Session::where('id', $request->session_id)->first();
             $session->exercices()->attach($exercice,['tempo' => 120, 'seconds' => 300]);            
         }
 
-        return redirect()->route('exercices.show', [$exercice])->with('status', 'Ejercicio guardado correctamente');
+
+       return response()->json(['text' => 'ok', 'request' => $request->categoria_id]); 
 
 //return public_path();
      // return 'store';

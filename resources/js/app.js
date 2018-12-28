@@ -11,6 +11,10 @@ window.Vue = require('vue');
 require('vue2-siema'); 
 import Siema from 'vue2-siema'
 
+
+require('tiptap'); 
+require('tiptap-extensions'); 
+
 Vue.use(Siema)
 
 /**
@@ -37,6 +41,7 @@ Vue.component('register', require('./components/RegisterComponent.vue'));
 Vue.component('exerciceForm', require('./components/ExerciceFormComponent.vue'));
 Vue.component('exerciceFormDesktop', require('./components/ExerciceFormComponentDesktop.vue'));
 Vue.component('exerciceFormMobile', require('./components/ExerciceFormComponentMobile.vue'));
+Vue.component('exerciceEditor', require('./components/ExerciceEditorComponent.vue'));
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))

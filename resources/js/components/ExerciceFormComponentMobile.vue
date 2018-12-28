@@ -1,17 +1,5 @@
 <template>
-  <div>
-    <button v-on:click.prevent="next">next</button>
-    <button v-on:click.prevent="prev">prev</button>
-
-    <siema ref="siema" class="siema" :options="options"  @init="initFunc" @change="changeFunc">
-        <div class="slide" v-for="exercice in exercices" 
-        :key="exercice.id"
-        :exercice = "exercice">
-        <exercice :exercice = "exercice"></exercice> 
-    </div>        
-</siema>
-</div>
-
+    <exerciceEditor @updatedHtml="updateContent"></exerciceEditor>
 </template>
 
 <script>

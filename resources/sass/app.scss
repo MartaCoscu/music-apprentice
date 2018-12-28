@@ -54,6 +54,7 @@ button{
 
 .ma-main-section {
 	background-color: #fff;
+	padding: 1em;
 	width: 100%; 
 }
 
@@ -169,7 +170,6 @@ button{
 .ma-login, .ma-singup{
 	margin: 3em auto;
 
-	width: 510px; 
 	ul{
 		padding:0;
 		list-style-type: none;		
@@ -200,6 +200,64 @@ button{
 	background-color: red;  
 }
 
-.ma-card{
-	width: 500px; 
+.ma-editor{
+	border: solid red 1px; 
+	margin: auto;
+	padding: 1em; 
+	width: 100%; 
+}
+
+.ma-addFileButton {
+	a{
+		img {
+			&:first-child{
+				display: flex;
+			}
+			&:last-child{
+				display: none;
+			}	
+		}		
+	}
+
+	a:hover{
+		img {
+			&:first-child{
+				display: none;
+			}
+			&:last-child{
+				display: flex;
+			}	
+		}		
+	}
+}
+
+
+.ma-siema, .ma-login, .ma-singup{
+	@media #{$ma-xs} {
+		width: 500px; 
+	}
+	@media #{$ma-s} {
+		width: 500px;
+	}
+	@media #{$ma-m} {
+		width: 700px; 
+	}
+	@media #{$ma-l} {
+		width: 800px; 
+	}	
+	margin: auto;; 
+}
+
+.ma-addFiles{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2em; 
+}
+
+.ma-addFileButton{
+	padding: 0.5em;
+	img{
+		width: 100%; 
+		height: auto;
+	}
 }

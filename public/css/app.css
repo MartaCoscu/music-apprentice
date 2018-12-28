@@ -10516,6 +10516,7 @@ button {
 
 .ma-main-section {
   background-color: #fff;
+  padding: 1em;
   width: 100%;
 }
 
@@ -10662,7 +10663,6 @@ button {
 .ma-login,
 .ma-singup {
   margin: 3em auto;
-  width: 510px;
 }
 
 .ma-login ul,
@@ -10705,7 +10705,87 @@ button {
   background-color: red;
 }
 
-.ma-card {
-  width: 500px;
+.ma-editor {
+  border: solid red 1px;
+  margin: auto;
+  padding: 1em;
+  width: 100%;
+}
+
+.ma-addFileButton a img:first-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.ma-addFileButton a img:last-child {
+  display: none;
+}
+
+.ma-addFileButton a:hover img:first-child {
+  display: none;
+}
+
+.ma-addFileButton a:hover img:last-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.ma-siema,
+.ma-login,
+.ma-singup {
+  margin: auto;
+}
+
+@media (max-width: 767px) {
+  .ma-siema,
+  .ma-login,
+  .ma-singup {
+    width: 500px;
+  }
+}
+
+@media (min-width: 768px) {
+  .ma-siema,
+  .ma-login,
+  .ma-singup {
+    width: 500px;
+  }
+}
+
+@media (min-width: 992px) {
+  .ma-siema,
+  .ma-login,
+  .ma-singup {
+    width: 700px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ma-siema,
+  .ma-login,
+  .ma-singup {
+    width: 800px;
+  }
+}
+
+.ma-addFiles {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 2em;
+}
+
+.ma-addFileButton {
+  padding: 0.5em;
+}
+
+.ma-addFileButton img {
+  width: 100%;
+  height: auto;
 }
 
