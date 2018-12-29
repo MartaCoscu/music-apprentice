@@ -57,6 +57,7 @@ class exerciceController extends Controller
             $name = time().$file->getClientOriginalName();
             $file->move(public_path().'/files/', $name);
             $exercice->image = $name;
+            return $request->file('file');
             return response()->json(['name' => $oldname, 'url' => $name]); 
 
      //   }
