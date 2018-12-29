@@ -22,6 +22,9 @@ Route::post('/login', 'customAuth@login')->name('LogIn');
 Route::get('/logout', 'customAuth@logout')->name('LogOut');
 Route::get('/loggedin', 'customAuth@loggedin')->name('LoggedIn');
 
+Route::post('/upload', 'exerciceController@uploadFile')->name('uploadFile');
+
+
 Route::resource('users', 'userController');
 
 Route::resource('exercices', 'exerciceController'); 

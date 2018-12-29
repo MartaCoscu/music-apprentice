@@ -73865,6 +73865,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -73875,6 +73880,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         return {
+            file: '',
+
             editor: new __WEBPACK_IMPORTED_MODULE_0_tiptap__["Editor"]({
                 content: '\n                <h2>\n                Export HTML or JSON\n                </h2>\n                <p>\n                You are able to export your data as <code>HTML</code> or <code>JSON</code>. To pass <code>HTML</code> to the editor use the <code>content</code> slot. To pass <code>JSON</code> to the editor use the <code>doc</code> prop.\n                </p>\n                ',
 
@@ -73897,6 +73904,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        onUploadImg: function onUploadImg() {
+            $("#inputImg").trigger("click");
+        },
+        onUploadVideo: function onUploadVideo() {
+            $("#inputVideo").trigger("click");
+        },
+        onUploadAudio: function onUploadAudio() {
+
+            $("#inputAudio").trigger("click");
+        },
+        onFileChange: function onFileChange(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length) return;
+            //    this.createImage(files[0]);
+            this.file = files[0];
+            var formData = new FormData();
+            formData.append('file', this.file);
+            axios.post('/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log("error" + error);
+            });
+        },
         clearContent: function clearContent() {
             this.editor.clearContent(true);
             this.editor.focus();
@@ -73933,7 +73967,84 @@ var render = function() {
       "div",
       { staticClass: "ma-editor" },
       [
-        _vm._m(0),
+        _c("div", { staticClass: "ma-addFiles" }, [
+          _c("input", {
+            staticStyle: { display: "none" },
+            attrs: { id: "inputImg", accept: ".jpg,.png", type: "file" },
+            on: { change: _vm.onFileChange }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "ma-addFileButton" }, [
+            _c(
+              "a",
+              {
+                attrs: { href: "" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.onUploadImg($event)
+                  }
+                }
+              },
+              [
+                _c("img", { attrs: { src: "images/icons/bt_img_off.jpg" } }),
+                _c("img", { attrs: { src: "images/icons/bt_img_on.jpg" } })
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticStyle: { display: "none" },
+            attrs: { id: "inputVideo", type: "file", accept: ".mp4" },
+            on: { change: _vm.onFileChange }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "ma-addFileButton" }, [
+            _c(
+              "a",
+              {
+                attrs: { href: "" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.onUploadVideo($event)
+                  }
+                }
+              },
+              [
+                _c("img", { attrs: { src: "images/icons/bt_video_off.jpg" } }),
+                _c("img", { attrs: { src: "images/icons/bt_video_on.jpg" } })
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticStyle: { display: "none" },
+            attrs: { id: "inputAudio", type: "file", accept: ".mp3,.wav" },
+            on: { change: _vm.onFileChange }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "ma-addFileButton" }, [
+            _c(
+              "a",
+              {
+                attrs: { href: "" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.onUploadAudio($event)
+                  }
+                }
+              },
+              [
+                _c("img", { attrs: { src: "images/icons/bt_audio_off.jpg" } }),
+                _c("img", { attrs: { src: "images/icons/bt_audio_on.jpg" } })
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ]),
         _vm._v(" "),
         _c("editor-content", { attrs: { editor: _vm.editor } })
       ],
@@ -73946,31 +74057,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ma-addFiles" }, [
-      _c("div", { staticClass: "ma-addFileButton" }, [
-        _c("a", { attrs: { href: "" } }, [
-          _c("img", { attrs: { src: "images/icons/bt_img_off.jpg" } }),
-          _c("img", { attrs: { src: "images/icons/bt_img_on.jpg" } })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "ma-addFileButton" }, [
-        _c("a", { attrs: { href: "" } }, [
-          _c("img", { attrs: { src: "images/icons/bt_video_off.jpg" } }),
-          _c("img", { attrs: { src: "images/icons/bt_video_on.jpg" } })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "ma-addFileButton" }, [
-        _c("a", { attrs: { href: "" } }, [
-          _c("img", { attrs: { src: "images/icons/bt_audio_off.jpg" } }),
-          _c("img", { attrs: { src: "images/icons/bt_audio_on.jpg" } })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "ma-addFileButton" }, [
-        _c("img", { attrs: { src: "images/icons/bt_file_off.jpg" } })
-      ])
+    return _c("div", { staticClass: "ma-addFileButton" }, [
+      _c("img", { attrs: { src: "images/icons/bt_file_off.jpg" } })
     ])
   }
 ]

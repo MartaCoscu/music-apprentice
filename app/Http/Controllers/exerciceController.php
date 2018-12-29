@@ -44,6 +44,24 @@ class exerciceController extends Controller
         return view ('musicapprentice.exercices.create', compact(['categories', 'request'])); 
     }
 
+
+    public function uploadFile(Request $request)
+    {
+        $exercice = new Exercice(); 
+
+        if ($request -> hasFile('file')){
+            $file = $request->file('file');
+            $oldname = $file->getClientOriginalName();
+            $name = time().$file->getClientOriginalName();
+            $file->move(public_path().'/tmpfiles/', $name);
+            $exercice->image = $name;
+           return response()->json(['name' => $oldname, 'url' => '/tmpfiles/'.$name]); 
+
+        }
+
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *

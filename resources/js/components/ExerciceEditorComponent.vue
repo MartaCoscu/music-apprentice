@@ -3,9 +3,14 @@
 
         <div class="ma-editor">
             <div class="ma-addFiles">
-                <div class="ma-addFileButton"><a href=""><img src="images/icons/bt_img_off.jpg"/><img src="images/icons/bt_img_on.jpg"/></a></div>
-                <div class="ma-addFileButton"><a href=""><img src="images/icons/bt_video_off.jpg"/><img src="images/icons/bt_video_on.jpg"/></a></div>
-                <div class="ma-addFileButton"><a href=""><img src="images/icons/bt_audio_off.jpg"/><img src="images/icons/bt_audio_on.jpg"/></a></div>
+                <input id="inputImg" v-on:change="onFileChange" accept=".jpg,.png" type="file" style="display: none" />
+                <div class="ma-addFileButton"><a v-on:click.prevent="onUploadImg" href=""><img src="images/icons/bt_img_off.jpg"/><img src="images/icons/bt_img_on.jpg"/></a></div>
+
+                <input id="inputVideo" v-on:change="onFileChange" type="file" accept=".mp4" style="display: none" />
+                <div class="ma-addFileButton"><a v-on:click.prevent="onUploadVideo" href=""><img src="images/icons/bt_video_off.jpg"/><img src="images/icons/bt_video_on.jpg"/></a></div>
+
+                <input id="inputAudio" v-on:change="onFileChange" type="file" accept=".mp3,.wav" style="display: none" />
+                <div class="ma-addFileButton"><a href="" v-on:click.prevent="onUploadAudio"><img src="images/icons/bt_audio_off.jpg"/><img src="images/icons/bt_audio_on.jpg"/></a></div>
                 <div class="ma-addFileButton"><img src="images/icons/bt_file_off.jpg"/></div>
             </div>
             <editor-content :editor="editor" />
@@ -22,6 +27,8 @@
         },
         data() {
             return {
+                file: '',
+
                 editor: new Editor({
                     content:  `
                     <h2>
@@ -48,6 +55,43 @@
             this.editor.destroy()
         },
         methods: {
+
+            onUploadImg(){
+                $("#inputImg").trigger("click");
+            },
+
+            onUploadVideo(){
+                $("#inputVideo").trigger("click");
+            },
+
+            onUploadAudio(){
+
+                $("#inputAudio").trigger("click");
+            },
+
+
+            onFileChange(e) {
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                return;
+            //    this.createImage(files[0]);
+                this.file = files[0]; 
+                let formData = new FormData();
+                formData.append('file', this.file);
+                    axios.post('/upload',formData,
+                        {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                    .then((response) => {
+                        console.log(response); 
+                    })
+                    .catch((error) => {
+                        console.log("error" + error)
+                    })
+            },
+
 
             clearContent() {
                 this.editor.clearContent(true)
