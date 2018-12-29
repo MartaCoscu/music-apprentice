@@ -51,18 +51,17 @@ class exerciceController extends Controller
         $exercice = new Exercice(); 
 
 
-       // if ($request -> hasFile('file')){
+        if ($request -> hasFile('file')){
             $file = $request->file('file');
             $oldname = $file->getClientOriginalName();
             $name = time().$file->getClientOriginalName();
             $file->move(public_path().'/files/', $name);
             $exercice->image = $name;
-            return $request->file('file');
             return response()->json(['name' => $oldname, 'url' => $name]); 
 
-     //   }
+        }
 
-        return "hsd no file";
+        return "error uploading the file";
     }
 
 
