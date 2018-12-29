@@ -6,6 +6,7 @@
             {{ error }}
         </div>
         <div class="ma-addFiles">
+            yeeee
             <input id="inputImg" v-on:change="onImgUploaded" accept=".jpg,.png"   name="input_img" type="file" style="display: none" />
             <div class="ma-addFileButton"><a v-on:click.prevent="onUploadImg" href=""><img src="images/icons/bt_img_off.jpg"/><img src="images/icons/bt_img_on.jpg"/></a></div>
 
