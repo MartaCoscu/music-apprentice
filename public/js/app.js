@@ -47653,20 +47653,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-
     props: ['exercice'],
 
     data: function data() {
         return {
+            realText: '',
             editMode: false
         };
     },
     mounted: function mounted() {
         console.log('Component mounted.');
+
+        this.realText = this.exercice.text.split('[[').join('<');
+        this.realText = this.realText.split(']]').join('>');
     }
 });
 
@@ -47679,7 +47680,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { domProps: { innerHTML: _vm._s(_vm.exercice.description) } })
+    _c("div", { domProps: { innerHTML: _vm._s(_vm.realText) } })
   ])
 }
 var staticRenderFns = []
@@ -48931,7 +48932,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             email: '',
             password: '',
-            errors: []
+            ma_errors: []
         };
     },
     mounted: function mounted() {
@@ -48946,7 +48947,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         onSubmit: function onSubmit() {
             var _this = this;
 
-            this.errors = [];
+            this.ma_errors = [];
             var formData = new FormData();
             formData.append('email', this.email);
             formData.append('password', this.password);
@@ -48958,7 +48959,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (response.data.goHome == true) {
                     _this.$emit('logged');
                 } else {
-                    _this.errors.push("Login incorrecto");
+                    _this.ma_errors.push("Login incorrecto");
                 }
             }).catch(function (error) {
                 console.log("error" + error);
@@ -48981,7 +48982,7 @@ var render = function() {
     [
       _c("h1", [_vm._v("LOG IN")]),
       _vm._v(" "),
-      _vm._l(_vm.errors, function(error) {
+      _vm._l(_vm.ma_errors, function(error) {
         return _c("div", { staticClass: "ma-error" }, [
           _vm._v("\n        " + _vm._s(error) + "\n    ")
         ])
@@ -49228,7 +49229,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             password: '',
             new_password: '',
             bio: '',
-            errors: []
+            ma_errors: []
         };
     },
     mounted: function mounted() {
@@ -49255,7 +49256,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 }).then(function (response) {
                     console.log(response);
-                    _this.errors.push(response.data.text);
+                    _this.ma_errors.push(response.data.text);
                     if (response.data.goHome == true) {
                         _this.$emit('logged');
                     }
@@ -49265,23 +49266,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         validate: function validate() {
-            this.errors = [];
+            this.ma_errors = [];
             if (this.name == "") {
-                this.errors.push("el nombre no puede estar vacio");
+                this.ma_errors.push("el nombre no puede estar vacio");
             }
             if (this.email == "") {
-                this.errors.push("el email no puede estar vacio");
+                this.ma_errors.push("el email no puede estar vacio");
             }
 
             if (this.password == "") {
-                this.errors.push("la contraseña no puede estar vacía");
+                this.ma_errors.push("la contraseña no puede estar vacía");
             } else if (this.password.length < 8) {
-                this.errors.push("la contraseña debe tener más de 8 caracteres");
+                this.ma_errors.push("la contraseña debe tener más de 8 caracteres");
             } else if (this.password != this.new_password) {
-                this.errors.push("las contraseñas no coinciden");
+                this.ma_errors.push("las contraseñas no coinciden");
             }
 
-            if (this.errors.length > 0) {
+            if (this.ma_errors.length > 0) {
                 return false;
             } else {
                 return true;
@@ -49322,7 +49323,7 @@ var render = function() {
     [
       _c("h1", [_vm._v("SING UP")]),
       _vm._v(" "),
-      _vm._l(_vm.errors, function(error) {
+      _vm._l(_vm.ma_errors, function(error) {
         return _c("div", { staticClass: "ma-error" }, [
           _vm._v("\n        " + _vm._s(error) + "\n    ")
         ])
@@ -50198,7 +50199,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             categoria_id: 1,
             session_id: -1,
             text: '',
-            errors: []
+            ma_errors: []
         };
     },
     mounted: function mounted() {},
@@ -50209,17 +50210,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         updateContent: function updateContent(html) {
-            console.log("update content");
+            console.log("update content" + html);
             this.text = html;
         },
         onSubmit: function onSubmit() {
             var formData = new FormData();
             formData.append('name', this.name);
-            formData.append('text', this.text);
-            //formData.append('description', this.description);
+            formData.append('description', this.description);
             formData.append('categoria_id', this.categoria_id);
             formData.append('session_id', this.session_id);
-            formData.append('description', this.text);
+            formData.append('text', this.text);
             axios.post('/exercices', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -50247,7 +50247,7 @@ var render = function() {
     [
       _c("h1", [_vm._v("NUEVO EJERCICIO")]),
       _vm._v(" "),
-      _vm._l(_vm.errors, function(error) {
+      _vm._l(_vm.ma_errors, function(error) {
         return _c("div", { staticClass: "ma-error" }, [
           _vm._v("\n        " + _vm._s(error) + "\n    ")
         ])
@@ -73875,6 +73875,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
         EditorContent: __WEBPACK_IMPORTED_MODULE_0_tiptap__["EditorContent"]
@@ -73884,9 +73885,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         return {
             file: '',
-            errors: [],
+            ma_errors: [],
             editor: new __WEBPACK_IMPORTED_MODULE_0_tiptap__["Editor"]({
-                content: '\n                <h2>\n                Export HTML or JSON2\n                </h2>\n                <p>\n                You are able to export your data as <code>HTML</code> or <code>JSON</code>. To pass <code>HTML</code> to the editor use the <code>content</code> slot. To pass <code>JSON</code> to the editor use the <code>doc</code> prop.\n                </p>\n                ',
+                content: "",
 
                 onUpdate: function onUpdate(_ref) {
                     var getJSON = _ref.getJSON,
@@ -73900,7 +73901,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
-        console.log('Component mounted.');
+        this.html = this.editor.getHTML();
+        this.$emit("updatedHtml", this.html);
     },
     beforeDestroy: function beforeDestroy() {
         this.editor.destroy();
@@ -73917,26 +73919,70 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             $("#inputAudio").trigger("click");
         },
-        onFileChange: function onFileChange(e) {
+        onImgUploaded: function onImgUploaded(e) {
+            this.onFileChange(e, 0);
+        },
+        onVideoUploaded: function onVideoUploaded(e) {
+            this.onFileChange(e, 1);
+        },
+        onAudioUploaded: function onAudioUploaded(e) {
+            this.onFileChange(e, 2);
+        },
+        onFileChange: function onFileChange(e, type) {
             var _this2 = this;
 
+            this.ma_errors = [];
             var files = e.target.files || e.dataTransfer.files;
             if (!files.length) return;
-            //    this.createImage(files[0]);
+            // this.createImage(files[0]);
             this.file = files[0];
-            var formData = new FormData();
-            formData.append('file', this.file);
-            axios.post('/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(function (response) {
-                console.log(response);
-            }).catch(function (error) {
-                console.log("error" + error);
+            if (this.file.size > 8000000) {
 
-                _this2.errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb");
-            });
+                this.ma_errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb");
+            } else {
+                var formData = new FormData();
+                formData.append('file', this.file);
+                axios.post('/upload', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(function (response) {
+                    console.log(response.data.url);
+                    var mystring = "";
+                    switch (type) {
+                        case 0:
+                            mystring = "[[img src='files/" + response.data.url + "' alt='imagen del ejercicio']]";
+
+                            break;
+
+                        case 1:
+                            mystring = "[[video width='320' height='240' controls]][[source src='files/" + response.data.url + "'; type='video/mp4']]Tu navegador no soporta el video]][[/video]]";
+                            break;
+
+                        case 2:
+                            mystring = "[[audio controls]][[source src='files/{{$exercice->audio}}' type='audio/mpeg']]Your browser does not support the audio element.[[/audio]]";
+                            break;
+                    }
+                    _this2.addToContent(mystring);
+                }).catch(function (error) {
+                    console.log("error" + error);
+
+                    _this2.ma_errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb");
+                });
+            }
+        },
+        addToContent: function addToContent(mystring) {
+            this.html = this.editor.getHTML();
+            this.$emit("updatedHtml", this.html);
+
+            this.editor.setContent(this.html + "<p>" + mystring + "</p>");
+            console.log(mystring);
+            this.html = this.editor.getHTML();
+            this.$emit("updatedHtml", this.html);
+            //this.editor.onUpdate = ({ getJSON, getHTML }) => {
+            // this.html = getHTML();
+            //this.$emit("updatedHtml", this.html); 
+            //}
         },
         clearContent: function clearContent() {
             this.editor.clearContent(true);
@@ -73959,6 +74005,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.editor.focus();
         }
     }
+
 });
 
 /***/ }),
@@ -73974,17 +74021,22 @@ var render = function() {
       "div",
       { staticClass: "ma-editor" },
       [
-        _vm._l(_vm.errors, function(error) {
+        _vm._l(_vm.ma_errors, function(error) {
           return _c("div", { staticClass: "ma-error" }, [
-            _vm._v("\n        " + _vm._s(error) + "\n    ")
+            _vm._v("\n            " + _vm._s(error) + "\n        ")
           ])
         }),
         _vm._v(" "),
         _c("div", { staticClass: "ma-addFiles" }, [
           _c("input", {
             staticStyle: { display: "none" },
-            attrs: { id: "inputImg", accept: ".jpg,.png", type: "file" },
-            on: { change: _vm.onFileChange }
+            attrs: {
+              id: "inputImg",
+              accept: ".jpg,.png",
+              name: "input_img",
+              type: "file"
+            },
+            on: { change: _vm.onImgUploaded }
           }),
           _vm._v(" "),
           _c("div", { staticClass: "ma-addFileButton" }, [
@@ -74008,8 +74060,13 @@ var render = function() {
           _vm._v(" "),
           _c("input", {
             staticStyle: { display: "none" },
-            attrs: { id: "inputVideo", type: "file", accept: ".mp4" },
-            on: { change: _vm.onFileChange }
+            attrs: {
+              id: "inputVideo",
+              type: "file",
+              accept: ".mp4",
+              name: "input_video"
+            },
+            on: { change: _vm.onVideoUploaded }
           }),
           _vm._v(" "),
           _c("div", { staticClass: "ma-addFileButton" }, [
@@ -74033,8 +74090,13 @@ var render = function() {
           _vm._v(" "),
           _c("input", {
             staticStyle: { display: "none" },
-            attrs: { id: "inputAudio", type: "file", accept: ".mp3,.wav" },
-            on: { change: _vm.onFileChange }
+            attrs: {
+              id: "inputAudio",
+              type: "file",
+              accept: ".mp3,.wav",
+              name: "input_audio"
+            },
+            on: { change: _vm.onAudioUploaded }
           }),
           _vm._v(" "),
           _c("div", { staticClass: "ma-addFileButton" }, [

@@ -53,9 +53,9 @@ class exerciceController extends Controller
             $file = $request->file('file');
             $oldname = $file->getClientOriginalName();
             $name = time().$file->getClientOriginalName();
-            $file->move(public_path().'/tmpfiles/', $name);
+            $file->move(public_path().'/files/', $name);
             $exercice->image = $name;
-           return response()->json(['name' => $oldname, 'url' => '/tmpfiles/'.$name]); 
+            return response()->json(['name' => $oldname, 'url' => $name]); 
 
         }
 
@@ -71,65 +71,31 @@ class exerciceController extends Controller
     public function store(Request $request)
     {
 
+
         $exercice = new Exercice(); 
 
-        if ($request -> hasFile('image_file')){
-
-            $file = $request->file('image_file');
-
-            $name = time().$file->getClientOriginalName();
-
-            $file->move(public_path().'/images/', $name);
-
-            $exercice->image = $name;
-      
-        }
 
 
         $exercice->name = $request->name;
+
         $exercice->text = $request->text;
+
         $exercice->description = $request->description;
 
         $exercice->user_id = $request->user()->id; 
         $exercice->categoria_id = $request->categoria_id; 
 
-        if ($request -> hasFile('image_file')){
-            $file = $request->file('image_file'); 
-            $name = time().$file->getClientOriginalName();
-            $file->move(public_path().'/images/', $name);
-            $exercice->image = $name;
-            
-        }
-
-
-        if ($request -> hasFile('video_file')){
-            $file = $request->file('video_file'); 
-            $name = time().$file->getClientOriginalName();
-            $file->move(public_path().'/videos/', $name);
-            $exercice->video = $name;
-        }   
-
-
-        if ($request -> hasFile('audio_file')){
-            $file = $request->file('audio_file'); 
-            $name = time().$file->getClientOriginalName();
-            $file->move(public_path().'/audios/', $name);
-            $exercice->audio = $name;
-        }   
-
-
         $exercice->save();
-             
+
+
         if ($request->session_id != -1){
             $session = Session::where('id', $request->session_id)->first();
             $session->exercices()->attach($exercice,['tempo' => 120, 'seconds' => 300]);            
         }
 
+        return "ok"; 
+   //    return response()->json(['text' => 'ok'); 
 
-       return response()->json(['text' => 'ok', 'request' => $request->categoria_id]); 
-
-//return public_path();
-     // return 'store';
     }
 
     /**
@@ -244,11 +210,11 @@ class exerciceController extends Controller
             \File::delete($video_path);
         }
 
-          if(!empty($exercice->audio)){
+        if(!empty($exercice->audio)){
             $audio_path = public_path().'/audios/'.$exercice->audio;
             \File::delete($audio_path);
         }
-      
+
 
 
         $exercice->delete();

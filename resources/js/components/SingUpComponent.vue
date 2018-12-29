@@ -1,7 +1,7 @@
 <template>
     <div class="ma-singup">
         <h1>SING UP</h1>
-        <div class="ma-error" v-for="error in errors">
+        <div class="ma-error" v-for="error in ma_errors">
             {{ error }}
         </div>
         <form method="POST" action="" v-on:submit.prevent="onSubmit()">
@@ -45,7 +45,7 @@
                 password: '',
                 new_password: '',
                 bio: '',
-                errors:[
+                ma_errors:[
                 ]
             }
         },
@@ -73,7 +73,7 @@
                         })
                     .then((response) => {
                     console.log(response); 
-                        this.errors.push(response.data.text)
+                        this.ma_errors.push(response.data.text)
                         if (response.data.goHome == true){
                             this.$emit('logged'); 
                         } 
@@ -85,25 +85,25 @@
             },
 
             validate(){
-                this.errors = []; 
+                this.ma_errors = []; 
                 if (this.name == ""){
-                    this.errors.push("el nombre no puede estar vacio")
+                    this.ma_errors.push("el nombre no puede estar vacio")
                 } 
                 if (this.email == ""){
-                    this.errors.push("el email no puede estar vacio")                
+                    this.ma_errors.push("el email no puede estar vacio")                
                 }
 
                 if (this.password == ""){
-                    this.errors.push("la contraseña no puede estar vacía")
+                    this.ma_errors.push("la contraseña no puede estar vacía")
                 }
                 else if (this.password.length < 8) {
-                    this.errors.push("la contraseña debe tener más de 8 caracteres")                                   
+                    this.ma_errors.push("la contraseña debe tener más de 8 caracteres")                                   
                 }
                 else if (this.password != this.new_password){
-                    this.errors.push("las contraseñas no coinciden");                 
+                    this.ma_errors.push("las contraseñas no coinciden");                 
                 }
 
-                if (this.errors.length>0){
+                if (this.ma_errors.length>0){
                     return false;
                 } else {
                     return true; 

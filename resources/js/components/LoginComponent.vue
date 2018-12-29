@@ -1,7 +1,7 @@
 <template>
     <div class="ma-login">
         <h1>LOG IN</h1>
-        <div class="ma-error" v-for="error in errors">
+        <div class="ma-error" v-for="error in ma_errors">
             {{ error }}
         </div>
         <form method="POST" action="" v-on:submit.prevent="onSubmit()">
@@ -26,7 +26,7 @@
             return {
                 email: '',
                 password: '',
-                errors:[
+                ma_errors:[
                 ]
             }
         },
@@ -40,7 +40,7 @@
             },
 
             onSubmit(){
-                this.errors = [];
+                this.ma_errors = [];
                 let formData = new FormData();
                 formData.append('email', this.email);
                 formData.append('password', this.password);
@@ -54,7 +54,7 @@
                     if (response.data.goHome == true){
                         this.$emit('logged');                         
                     } else {
-                        this.errors.push("Login incorrecto"); 
+                        this.ma_errors.push("Login incorrecto"); 
                     }
                 })
                 .catch((error) => {

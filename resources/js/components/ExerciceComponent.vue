@@ -1,25 +1,27 @@
 <template>
     <div>
-
-                <div v-html="exercice.description">
-                </div>
-          
+        <div v-html="realText">
+        </div>
     </div>
 </template>
 
 <script>
     export default {
-
         props: ['exercice'],
 
-       data() {
+        data() {
             return {
+                realText: '',
                 editMode: false
             };
         },
 
         mounted() {
-            console.log('Component mounted.')
+            console.log('Component mounted.');
+
+            this.realText = this.exercice.text.split('[[').join('<');
+            this.realText = this.realText.split(']]').join('>');
+
         }
     }
 </script>

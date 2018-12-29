@@ -1,7 +1,7 @@
 <template>
     <div class="ma-singup">
         <h1>NUEVO EJERCICIO</h1>
-        <div class="ma-error" v-for="error in errors">
+        <div class="ma-error" v-for="error in ma_errors">
             {{ error }}
         </div>
         <form method="POST" action="" v-on:submit.prevent="onSubmit()">
@@ -39,7 +39,7 @@
             categoria_id: 1,
             session_id: -1,
             text:'',
-            errors: [
+            ma_errors: [
             ],
         }
     },
@@ -56,17 +56,16 @@
 
 
         updateContent(html){
-            console.log("update content"); 
+            console.log("update content" + html); 
             this.text = html; 
         },
         onSubmit(){
             let formData = new FormData();
             formData.append('name', this.name);
-            formData.append('text', this.text);
-            //formData.append('description', this.description);
+            formData.append('description', this.description);
             formData.append('categoria_id', this.categoria_id);
             formData.append('session_id', this.session_id);
-            formData.append('description',this.text); 
+            formData.append('text',this.text);
             axios.post('/exercices',formData,
             {
                 headers: {

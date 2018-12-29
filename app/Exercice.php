@@ -8,15 +8,12 @@ use musicapprentice\Session;
 class Exercice extends Model
 {
 
-	protected $fillable= ['name', 'description', 'image', 'video', 'audio','text', 'categoria_id'];
+	protected $fillable= ['name', 'description','text', 'categoria_id'];
 
 
     protected $attributes = [
         'name' => '',
         'description' => '',
-        'image' => '',
-        'video' => '',
-        'audio' => '',
         'text' => '',
         'categoria_id' => 0,
 
