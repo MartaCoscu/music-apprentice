@@ -53,7 +53,7 @@ class exerciceController extends Controller
         $exercice = new Exercice(); 
 
 
-      /*  if ($request -> hasFile('file')){
+        if ($request -> hasFile('file')){
             $file = $request->file('file');
             $oldname = $file->getClientOriginalName();
             $name = time().$file->getClientOriginalName();
@@ -61,7 +61,7 @@ class exerciceController extends Controller
             $exercice->image = $name;
             return response()->json(['name' => $oldname, 'url' => $name]); 
 
-        }*/
+        }
 
         return $request;
     }
