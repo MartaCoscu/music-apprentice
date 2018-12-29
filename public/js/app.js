@@ -73948,7 +73948,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 axios({
                     method: 'post',
                     url: '/upload',
-                    headers: { 'Content-Type': 'text/html; charset=utf-8' },
+                    headers: { 'Content-Type': 'text/html; charset=utf-8', 'X-Content-Type-Options': 'nosniff' },
                     data: formData
                 }).then(function (response) {
                     console.log(response.data);
