@@ -63,7 +63,7 @@ class exerciceController extends Controller
 
         }
 
-        return $request;
+        return "hsd no file";
     }
 
 
