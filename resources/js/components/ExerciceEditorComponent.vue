@@ -6,7 +6,7 @@
             {{ error }}
         </div>
         <div class="ma-addFiles">
-            oooh
+            no
             <input id="inputImg" v-on:change="onImgUploaded" accept=".jpg,.png"   name="input_img" type="file" style="display: none" />
             <div class="ma-addFileButton"><a v-on:click.prevent="onUploadImg" href=""><img src="images/icons/bt_img_off.jpg"/><img src="images/icons/bt_img_on.jpg"/></a></div>
 
@@ -99,7 +99,7 @@
                     axios({
                         method: 'post',
                         url: '/upload',
-                        headers:{'Content-Type': 'text/html; charset=utf-8', 'X-Content-Type-Options': 'nosniff'},
+                        headers:{'Content-Type': 'text/html; charset=utf-8'},
                         data: formData
                     })
                     .then((response) => {
