@@ -73943,11 +73943,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else {
                 var formData = new FormData();
                 formData.append('file', this.file);
-                alert(this.file);
-                var config = {
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-                };
-                axios.post('/upload', formData, config).then(function (response) {
+
+                axios({
+                    method: 'post',
+                    url: '/upload',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    data: formData
+                }).then(function (response) {
                     console.log(response.data);
                     var mystring = "";
                     switch (type) {

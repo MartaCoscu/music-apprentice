@@ -2,7 +2,7 @@
     <div>
 
         <div class="ma-editor">
-         <div class="ma-error" v-for="error in ma_errors">
+           <div class="ma-error" v-for="error in ma_errors">
             {{ error }}
         </div>
         <div class="ma-addFiles">
@@ -93,11 +93,14 @@
                 } else {
                     let formData = new FormData();
                     formData.append('file', this.file);
-                    alert(this.file); 
-var config = {
-  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-};
-                    axios.post('/upload',formData, config)
+                    
+
+                    axios({
+                        method: 'post',
+                        url: '/upload',
+                        headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+                        data: formData
+                    })
                     .then((response) => {
                         console.log(response.data); 
                         let mystring = ""; 
@@ -123,18 +126,17 @@ var config = {
                         this.ma_errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb"); 
                     })             
                 }
-
             },
 
             addToContent(mystring){
-             this.html = this.editor.getHTML(); 
-             this.$emit("updatedHtml", this.html); 
+               this.html = this.editor.getHTML(); 
+               this.$emit("updatedHtml", this.html); 
 
 
-             this.editor.setContent(this.html + "<p>" + mystring + "</p>")
-             console.log(mystring); 
-             this.html = this.editor.getHTML(); 
-             this.$emit("updatedHtml", this.html); 
+               this.editor.setContent(this.html + "<p>" + mystring + "</p>")
+               console.log(mystring); 
+               this.html = this.editor.getHTML(); 
+               this.$emit("updatedHtml", this.html); 
 //this.editor.onUpdate = ({ getJSON, getHTML }) => {
  // this.html = getHTML();
   //this.$emit("updatedHtml", this.html); 
