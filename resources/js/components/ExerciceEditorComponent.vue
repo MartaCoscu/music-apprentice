@@ -99,7 +99,7 @@
                        }
                    })
                     .then((response) => {
-                        console.log(response.data.url); 
+                        console.log("response: " +response.data); 
                         let mystring = ""; 
                         switch (type){
                             case 0:

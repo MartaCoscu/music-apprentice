@@ -73947,7 +73947,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         'Content-Type': 'multipart/form-data'
                     }
                 }).then(function (response) {
-                    console.log(response.data.url);
+                    console.log("response: " + response.data);
                     var mystring = "";
                     switch (type) {
                         case 0:
