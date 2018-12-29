@@ -86,6 +86,9 @@
                     return;
                    // this.createImage(files[0]);
                    this.file = files[0];
+
+                   alert(this.file); 
+
                    if (this.file.size > 8000000){
 
                     this.ma_errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb"); 
