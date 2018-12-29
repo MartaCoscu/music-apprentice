@@ -99,7 +99,7 @@
                     axios({
                         method: 'post',
                         url: '/upload',
-                        headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+                        headers:{'Content-Type': 'text/html; charset=utf-8', 'X-Content-Type-Options': 'nosniff'},
                         data: formData
                     })
                     .then((response) => {
