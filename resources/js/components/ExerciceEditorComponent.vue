@@ -94,13 +94,10 @@
                     let formData = new FormData();
                     formData.append('file', this.file);
                     alert(this.file); 
-
-                    axios.post('/upload',formData,
-                    {
-                        headers: {
-                     //      'Content-Type': 'multipart/form-data'
-                       }
-                   })
+var config = {
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+};
+                    axios.post('/upload',formData, config)
                     .then((response) => {
                         console.log(response.data); 
                         let mystring = ""; 

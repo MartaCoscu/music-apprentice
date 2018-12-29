@@ -73944,12 +73944,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var formData = new FormData();
                 formData.append('file', this.file);
                 alert(this.file);
-
-                axios.post('/upload', formData, {
-                    headers: {
-                        //      'Content-Type': 'multipart/form-data'
-                    }
-                }).then(function (response) {
+                var config = {
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                };
+                axios.post('/upload', formData, config).then(function (response) {
                     console.log(response.data);
                     var mystring = "";
                     switch (type) {
