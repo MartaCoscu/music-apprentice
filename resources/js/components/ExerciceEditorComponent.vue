@@ -2,6 +2,9 @@
     <div>
 
         <div class="ma-editor">
+         <div class="ma-error" v-for="error in errors">
+            {{ error }}
+        </div>
             <div class="ma-addFiles">
                 <input id="inputImg" v-on:change="onFileChange" accept=".jpg,.png" type="file" style="display: none" />
                 <div class="ma-addFileButton"><a v-on:click.prevent="onUploadImg" href=""><img src="images/icons/bt_img_off.jpg"/><img src="images/icons/bt_img_on.jpg"/></a></div>
@@ -28,7 +31,8 @@
         data() {
             return {
                 file: '',
-
+                errors: [
+                ],
                 editor: new Editor({
                     content:  `
                     <h2>
@@ -88,6 +92,7 @@
                         console.log(response); 
                     })
                     .catch((error) => {
+                        errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb"); 
                         console.log("error" + error)
                     })
             },

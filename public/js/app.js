@@ -73870,6 +73870,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -73881,7 +73884,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         return {
             file: '',
-
+            errors: [],
             editor: new __WEBPACK_IMPORTED_MODULE_0_tiptap__["Editor"]({
                 content: '\n                <h2>\n                Export HTML or JSON2\n                </h2>\n                <p>\n                You are able to export your data as <code>HTML</code> or <code>JSON</code>. To pass <code>HTML</code> to the editor use the <code>content</code> slot. To pass <code>JSON</code> to the editor use the <code>doc</code> prop.\n                </p>\n                ',
 
@@ -73928,6 +73931,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 console.log(response);
             }).catch(function (error) {
+                errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb");
                 console.log("error" + error);
             });
         },
@@ -73967,6 +73971,12 @@ var render = function() {
       "div",
       { staticClass: "ma-editor" },
       [
+        _vm._l(_vm.errors, function(error) {
+          return _c("div", { staticClass: "ma-error" }, [
+            _vm._v("\n        " + _vm._s(error) + "\n    ")
+          ])
+        }),
+        _vm._v(" "),
         _c("div", { staticClass: "ma-addFiles" }, [
           _c("input", {
             staticStyle: { display: "none" },
@@ -74048,7 +74058,7 @@ var render = function() {
         _vm._v(" "),
         _c("editor-content", { attrs: { editor: _vm.editor } })
       ],
-      1
+      2
     )
   ])
 }
