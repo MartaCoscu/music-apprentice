@@ -59,6 +59,7 @@ class exerciceController extends Controller
 
         }
 
+return "has no file. ".$request->all(); 
     }
 
 
