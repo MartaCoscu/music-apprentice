@@ -32,7 +32,7 @@
                 editor: new Editor({
                     content:  `
                     <h2>
-                    Export HTML or JSON
+                    Export HTML or JSON2
                     </h2>
                     <p>
                     You are able to export your data as <code>HTML</code> or <code>JSON</code>. To pass <code>HTML</code> to the editor use the <code>content</code> slot. To pass <code>JSON</code> to the editor use the <code>doc</code> prop.

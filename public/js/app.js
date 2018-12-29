@@ -73883,7 +73883,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             file: '',
 
             editor: new __WEBPACK_IMPORTED_MODULE_0_tiptap__["Editor"]({
-                content: '\n                <h2>\n                Export HTML or JSON\n                </h2>\n                <p>\n                You are able to export your data as <code>HTML</code> or <code>JSON</code>. To pass <code>HTML</code> to the editor use the <code>content</code> slot. To pass <code>JSON</code> to the editor use the <code>doc</code> prop.\n                </p>\n                ',
+                content: '\n                <h2>\n                Export HTML or JSON2\n                </h2>\n                <p>\n                You are able to export your data as <code>HTML</code> or <code>JSON</code>. To pass <code>HTML</code> to the editor use the <code>content</code> slot. To pass <code>JSON</code> to the editor use the <code>doc</code> prop.\n                </p>\n                ',
 
                 onUpdate: function onUpdate(_ref) {
                     var getJSON = _ref.getJSON,
