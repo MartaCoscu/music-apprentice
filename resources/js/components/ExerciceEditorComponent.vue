@@ -98,7 +98,8 @@
                     axios.post('/upload',formData,
                     {
                         headers: {
-                           'Content-Type': 'multipart/form-data'
+                     //      'Content-Type': 'multipart/form-data'
+                     'Content-Type': 'text/html; charset=utf-8'
                        }
                    })
                     .then((response) => {
