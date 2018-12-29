@@ -73918,6 +73918,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             $("#inputAudio").trigger("click");
         },
         onFileChange: function onFileChange(e) {
+            var _this2 = this;
+
             var files = e.target.files || e.dataTransfer.files;
             if (!files.length) return;
             //    this.createImage(files[0]);
@@ -73931,8 +73933,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 console.log(response);
             }).catch(function (error) {
-                errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb");
                 console.log("error" + error);
+
+                _this2.errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb");
             });
         },
         clearContent: function clearContent() {

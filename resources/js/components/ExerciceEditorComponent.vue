@@ -92,8 +92,9 @@
                         console.log(response); 
                     })
                     .catch((error) => {
-                        errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb"); 
-                        console.log("error" + error)
+                                                console.log("error" + error);
+
+                        this.errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb"); 
                     })
             },
 
