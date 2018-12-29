@@ -48,8 +48,6 @@ class exerciceController extends Controller
     public function uploadFile(Request $request)
     {
 
-            return $request->all(); 
-
         $exercice = new Exercice(); 
 
 
