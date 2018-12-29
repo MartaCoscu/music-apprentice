@@ -73937,14 +73937,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // this.createImage(files[0]);
             this.file = files[0];
 
-            alert(this.file);
-
             if (this.file.size > 8000000) {
 
                 this.ma_errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb");
             } else {
                 var formData = new FormData();
                 formData.append('file', this.file);
+                alert(this.file);
+
                 axios.post('/upload', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
