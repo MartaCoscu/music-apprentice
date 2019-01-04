@@ -1,9 +1,9 @@
 <template>
     <div class="ma-container ma-icons">
         <div class="ma-icons-container">
-            <img class="ma-icon" src="images/icons/atras.png">
-            <img class="ma-icon" src="images/icons/lupa.png">
-            <img class="ma-icon" src="images/icons/stats.png">
+            <a><img class="ma-icon" src="images/icons/atras.png"></a>
+            <a><img class="ma-icon" src="images/icons/lupa.png"></a>
+            <a><img class="ma-icon" src="images/icons/stats.png"></a>
             <a href="" v-on:click.prevent="onSelect(2)"><img class="ma-icon" src="images/icons/sesiones.png"></a>
             <a href="" v-on:click.prevent="onSelect(1)"><img class="ma-icon" src="images/icons/ejercicio.png"></a>
             <a href="" v-on:click.prevent="onSelect(0)"><img class="ma-icon" src="images/icons/usuario.png"></a>

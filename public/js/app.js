@@ -71603,20 +71603,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "ma-container ma-icons" }, [
     _c("div", { staticClass: "ma-icons-container" }, [
-      _c("img", {
-        staticClass: "ma-icon",
-        attrs: { src: "images/icons/atras.png" }
-      }),
+      _vm._m(0),
       _vm._v(" "),
-      _c("img", {
-        staticClass: "ma-icon",
-        attrs: { src: "images/icons/lupa.png" }
-      }),
+      _vm._m(1),
       _vm._v(" "),
-      _c("img", {
-        staticClass: "ma-icon",
-        attrs: { src: "images/icons/stats.png" }
-      }),
+      _vm._m(2),
       _vm._v(" "),
       _c(
         "a",
@@ -71677,7 +71668,41 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", [
+      _c("img", {
+        staticClass: "ma-icon",
+        attrs: { src: "images/icons/atras.png" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", [
+      _c("img", {
+        staticClass: "ma-icon",
+        attrs: { src: "images/icons/lupa.png" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", [
+      _c("img", {
+        staticClass: "ma-icon",
+        attrs: { src: "images/icons/stats.png" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
