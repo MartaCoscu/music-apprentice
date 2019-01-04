@@ -6,7 +6,7 @@
         </div>
         <form method="POST" action="" v-on:submit.prevent="onSubmit()">
             <ul>
-                <li v-if="edit"><label class="ma-label-text" for="email">Avatar:</label></li>
+                
                 <input id="inputImg" v-on:change="onFileChange" accept=".jpg,.png"   name="input_img" type="file" style="display: none" />
                 <li class="uploadAvatar" ref="avatar"><a v-on:click.prevent="onUploadImg" href=""><img class="ma-user-pic" v-bind:src="image_file"/></a></li>
                
@@ -14,7 +14,7 @@
                     <li><input type="text" v-model="name" class="ma-input-text" name="name" required>
                 </li>
                 <li><label class="ma-label-text" for="email">E-mail:</label></li>
-                    <li><input type="email" class="ma-input-text" v-model="email" name="email" required>
+                    <li><input type="text" class="ma-input-text" v-model="email" name="email" required>
                 </li>
                 <li><label class="ma-label-text" for="bio">Biografia:</label></li>
                     <li><textarea class="ma-input-text" v-model="bio" name="bio" required></textarea>

@@ -7,7 +7,7 @@
         <form method="POST" action="" v-on:submit.prevent="onSubmit()">
             <ul>
                 <li><label class="ma-label-text" for="email">e-mail</label></li>
-                <li><input class="ma-input-text" id="email" v-model="email" type="email" name="email" value="mail" required autofocus></li>
+                <li><input class="ma-input-text" id="email" v-model="email" type="text" name="email" value="mail" required autofocus></li>
                 <li><label class="ma-label-text" for="password">Contraseña</label></li>
                 <li><input id="password" class="ma-input-text" v-model="password" type="password" name="password" required></li>
                 <li class="ma-align-center"><button type="submit">Login</button></li>

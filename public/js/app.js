@@ -73095,7 +73095,7 @@ var render = function() {
                 staticClass: "ma-input-text",
                 attrs: {
                   id: "email",
-                  type: "email",
+                  type: "text",
                   name: "email",
                   value: "mail",
                   required: "",
@@ -73453,16 +73453,6 @@ var render = function() {
         },
         [
           _c("ul", [
-            _vm.edit
-              ? _c("li", [
-                  _c(
-                    "label",
-                    { staticClass: "ma-label-text", attrs: { for: "email" } },
-                    [_vm._v("Avatar:")]
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
             _c("input", {
               staticStyle: { display: "none" },
               attrs: {
@@ -73534,7 +73524,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "ma-input-text",
-                attrs: { type: "email", name: "email", required: "" },
+                attrs: { type: "text", name: "email", required: "" },
                 domProps: { value: _vm.email },
                 on: {
                   input: function($event) {
