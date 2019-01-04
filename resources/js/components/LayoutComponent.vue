@@ -51,6 +51,7 @@
         },
 
         onLogged(){
+            this.checkUser(); 
             this.forcelogin = false;
         },
 
@@ -67,6 +68,7 @@
         },
 
         onChangeSection(i){
+            this.checkUser();    
             console.log("seession"); 
             this.$refs.mainsection.onChangeSection(i);
         }

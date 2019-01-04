@@ -5,8 +5,8 @@
     <div class="ma_playing_timer ma-degradado"><input type="number" v-model="timer" max="3600" name=""></div>
    
     <div class="ma_playing_metronome ma-degradado"><form method="POST" action="" v-on:submit.prevent="updateMetronome()"><input type="number" v-model="myTempo" max="250" min="40" name=""></form></div>
-
-</div>
+    </div>
+<li class="ma-button"><button v-on:click.prevent="onPause"><span v-if="pause">Play</span><span v-else>Pause</span></button></li></ul>
         
         
 
@@ -50,7 +50,7 @@
 
                 },
                 realText: '',
-                
+                pause: false,
             };
         },
 
@@ -106,7 +106,9 @@
             if (this.playing == true){
                 console.log("timer"); 
                 const self = this;    
-                this.timer = parseInt(this.timer)-1;        
+                if (this.pause == false){
+                    this.timer = parseInt(this.timer)-1;        
+                }
                 if (this.timer <= 0){
                     this.$emit("onNext");
                 }
@@ -119,7 +121,9 @@
         uploadMetronome(){
             if (this.playing == true){
                 var audio = new Audio('metronome.wav');
-                audio.play(); 
+                if (this.pause == false){
+                     audio.play(); 
+                }
                 const self = this;          
                 var time = 60000/this.tempo;
                 setTimeout(function(){
@@ -127,6 +131,15 @@
                 },time,"JavaScript");                  
             }
 
+        },
+
+        onPause(){
+
+            if (this.pause == true){
+                this.pause = false; 
+            } else{
+                this.pause = true; 
+            }
         }
 
     }

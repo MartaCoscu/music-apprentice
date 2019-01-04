@@ -22,6 +22,8 @@ Route::post('/login', 'customAuth@login')->name('LogIn');
 Route::get('/logout', 'customAuth@logout')->name('LogOut');
 Route::get('/loggedin', 'customAuth@loggedin')->name('LoggedIn');
 Route::patch('/user', 'customAuth@updateuser')->name('User');
+Route::get('/getNumbers', 'customAuth@getNumbers')->name('getNumbers');
+
 
 
 

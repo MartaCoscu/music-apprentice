@@ -12,7 +12,9 @@
              <div class="ma-exercices-container" >
                 <exerciceInSessionCard class="ma-exerciceCardParent" @onShow="onShow(exercice)" v-for="exercice in exercices"
                 :key="exercice.id"
-                :exercice = "exercice">
+                :exercice = "exercice"
+                :session = "id"
+                >
                 </exerciceInSessionCard>
             </div>       
             <div class="ma-button">    
@@ -53,7 +55,7 @@
                 })
                 .then((response) => {
                    console.log(response.data.exercices); 
-                    this.name = response.name;
+                    this.name = response.data.name;
                     this.exercices = response.data.exercices;
 
                 })

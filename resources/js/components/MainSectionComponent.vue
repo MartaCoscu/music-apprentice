@@ -24,8 +24,8 @@
 
         data(){
             return {
-                perfil: false, 
-                ejercicios: true,
+                perfil: true, 
+                ejercicios: false,
                 sesiones: false
             }
         },

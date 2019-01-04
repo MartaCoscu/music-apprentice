@@ -20,6 +20,31 @@
         <div v-if="edit" class="ma-button">
             <button v-on:click.prevent="save">Actualizar</button>
         </div>
+        <div v-else>
+
+        <a href=""  v-on:click.prevent="" ><div class="ma-exerciceCard ma-exerciceCardSession">
+            <div class="ma-exerciceCardName ">
+                Ejercicios
+            </div>
+            <div class="ma-exerciceCardValues">
+            {{ numExercices }}
+            </div>
+        </div></a>
+        <a href=""  v-on:click.prevent="" ><div class="ma-exerciceCard ma-exerciceCardSession">
+            <div class="ma-exerciceCardName ">
+                Sesiones
+            </div>
+            <div class="ma-exerciceCardValues">
+            {{ numSessions }}
+            </div>
+        </div></a>
+
+
+
+
+
+        </div>
+
         <div v-if="edit" class="ma-button">
             <button v-on:click.prevent="cancelar">Cancelar</button>
         </div>
@@ -33,6 +58,36 @@
 
     export default {
     	props: ['user'],
+          watch: { 
+                user: function(newVal, oldVal) { // 
+                
+            this.myuser.name = this.user.name;
+            this.myuser.email = this.user.email;
+            this.myuser.bio = this.user.bio;
+            this.myuser.avatar_url = this.user.avatar_url;
+            this.myuser.id = this.user.id;
+            this.cuser = this.user;
+
+
+                let formData = new FormData();
+                axios.get('/getNumbers/', formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then((response) => {
+                    console.log(response); 
+                    this.numSessions = response.data.numSessions;
+                    this.numExercices = response.data.numExercices;
+
+                })
+                .catch((error) => {
+                    console.log("error" + error)
+                })
+
+                }
+              },
         data() {
             return {
                 edit: false,
@@ -43,7 +98,9 @@
                     bio:"",
                     avatar_url:"",
                     id:"",
-                }
+                },
+                numExercices:"",
+                numSessions:"",
             };
         },
 
@@ -54,6 +111,25 @@
             this.myuser.avatar_url = this.user.avatar_url;
             this.myuser.id = this.user.id;
             this.cuser = this.user;
+
+
+                let formData = new FormData();
+                axios.get('/getNumbers/', formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then((response) => {
+                    console.log(response); 
+                    this.numSessions = response.data.numSessions;
+                    this.numExercices = response.data.numExercices;
+
+                })
+                .catch((error) => {
+                    console.log("error" + error)
+                })
+
         },
 
         methods:{

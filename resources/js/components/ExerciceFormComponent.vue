@@ -1,10 +1,7 @@
 <template>
     <div>
-        <exerciceFormDesktop  @list="onList()" @onShow="onShow" v-if="window.greater" :exercice=exercice :edit=edit>
+        <exerciceFormDesktop  @list="onList()" @onShow="onShow" :exercice=exercice :edit=edit>
         </exerciceFormDesktop>
-
-        <exerciceFormMobile v-else>
-        </exerciceFormMobile>
 
     </div>
 </template>

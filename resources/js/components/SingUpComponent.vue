@@ -6,6 +6,7 @@
         </div>
         <form method="POST" action="" v-on:submit.prevent="onSubmit()">
             <ul>
+                <li v-if="edit"><label class="ma-label-text" for="email">Avatar:</label></li>
                 <input id="inputImg" v-on:change="onFileChange" accept=".jpg,.png"   name="input_img" type="file" style="display: none" />
                 <li class="uploadAvatar" ref="avatar"><a v-on:click.prevent="onUploadImg" href=""><img class="ma-user-pic" v-bind:src="image_file"/></a></li>
                
@@ -27,9 +28,9 @@
                 <li><input id="password" v-model="new_password" class="ma-input-text" type="password" name="password" required>
                 </li>   
 
-                <li class="ma-align-center"><button type="submit">Sing Up</button></li>
+                <li class="ma-button"><button type="submit">Sing Up</button></li>
 
-                <li class="ma-align-center"><a href="" v-on:click.prevent="onClickLogin">Ya tengo una cuenta</a></li>
+                <li class="ma-button"><a href="" v-on:click.prevent="onClickLogin">Ya tengo una cuenta</a></li>
             </ul>
         </form>
     </div>

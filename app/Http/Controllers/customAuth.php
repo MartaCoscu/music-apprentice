@@ -118,4 +118,11 @@ class customAuth extends Controller
         return $user; 
 //        $request->user->save(); 
     }
+
+    public function getNumbers(Request $request){
+        $numExercices = $request->user()->exercices;
+        $numSessions = $request->user()->sessions;
+
+        return response()->json(['numExercices' => sizeof($numExercices), 'numSessions' => sizeof($numSessions)]); 
+    }
 }

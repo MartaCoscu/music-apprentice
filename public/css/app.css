@@ -10714,6 +10714,11 @@ ul {
   margin: auto;
 }
 
+.ma_icon_session {
+  padding-right: 1em;
+  width: 50px;
+}
+
 .ma-align-center {
   text-align: center;
   display: -webkit-box;
@@ -10853,6 +10858,10 @@ exercice-editor {
   }
 }
 
+.ma-siema {
+  margin: auto;
+}
+
 .ma-singup ul,
 .ma-login ul {
   margin: auto;
@@ -10879,6 +10888,10 @@ exercice-editor {
 .ma-addFileButton img {
   width: 100%;
   height: auto;
+}
+
+.ma-exerciceCardParent {
+  text-align: left;
 }
 
 @media (max-width: 767px) {
@@ -10912,10 +10925,31 @@ exercice-editor {
 .ma-exerciceCard {
   background-color: #fac3a6;
   border: solid 3px #bc3e3f;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   color: #6b6b6b;
   padding: 2em;
   font-weight: bold;
   margin: 1em;
+}
+
+.ma-exerciceCard .ma-exerciceCardName {
+  width: 100%;
+}
+
+.ma-exerciceCardSession {
+  background: url("/images/sessionsbg.png") no-repeat right;
+  background-size: 230px 100%;
+}
+
+.ma-exerciceCardSession .ma-exerciceCardValues {
+  width: 80px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 80px;
+          flex: 0 0 80px;
+  text-align: right;
+  color: #fac3a6;
 }
 
 .ma-exercices-container {
@@ -11042,5 +11076,16 @@ label {
 
 .ma-main-section {
   text-align: center;
+}
+
+.ma-user .ma-exerciceCardSession {
+  max-width: 600px;
+  margin: 1em auto;
+}
+
+.showExercice img,
+.showExercice video,
+.showExercice audio {
+  max-width: 90%;
 }
 

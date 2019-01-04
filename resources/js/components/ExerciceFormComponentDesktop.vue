@@ -11,12 +11,10 @@
                 </li>
 
                 <li><label class="ma-label-text" for="categoria_id">Categoria:</label></li>
-                <li><select name="categoria_id" v-model="categoria_id">
-                    <option value=0>Volvo</option>
-                    <option value=1>Saab</option>
-                    <option value=2>Fiat</option>
-                    <option value=3>Audi</option>
-                </select> 
+                <li><select v-model="categoria_id">
+        <option v-for="categoria in categories" name="exercice" 
+        :categoria="categories" v-bind:value="categoria.id"> {{ categoria.name }}</option>
+        </select>
             </li>
 
             <li><label class="ma-label-text" for="description">Resumen:</label></li> 
@@ -61,7 +59,9 @@
                 session_id: -1,
                 text:'',
                 ma_errors: [
-                ],                
+                ],    
+                categories:[
+                ]            
             }
         },
 
@@ -73,6 +73,23 @@
                 this.categoria_id = this.exercice.categoria_id,
                 this.text = this.exercice.text
             }
+
+            let formData = new FormData();
+
+                axios.get('/exercices/create',formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then((response) => {
+                    this.categories = response.data;  
+                    this.$emit('onShow', response.data.exercice.id); 
+
+                })
+                .catch((error) => {
+                    console.log("error" + error)
+                })
         },
 
         methods: {
@@ -110,7 +127,7 @@
             } else {
 
 
-                axios.post('/exercices',formData,
+               axios.post('/exercices',formData,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data'
@@ -123,7 +140,7 @@
                 })
                 .catch((error) => {
                     console.log("error" + error)
-                })
+                }) 
             }
 
         }

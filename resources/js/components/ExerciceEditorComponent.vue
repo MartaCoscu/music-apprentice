@@ -12,7 +12,7 @@
                 <input id="inputVideo" v-on:change="onVideoUploaded" type="file" accept=".mp4" name="input_video" style="display: none" />
                 <div class="ma-addFileButton"><a v-on:click.prevent="onUploadVideo" href=""><img src="images/icons/bt_video_off.jpg"/><img src="images/icons/bt_video_on.jpg"/></a></div>
 
-                <input id="inputAudio" v-on:change="onAudioUploaded" type="file" accept=".mp3,.wav" name="input_audio" style="display: none" />
+                <input id="inputAudio" v-on:change="onAudioUploaded" type="file" accept=".mp3,.wav,.ogg" name="input_audio" style="display: none" />
                 <div class="ma-addFileButton"><a href="" v-on:click.prevent="onUploadAudio"><img src="images/icons/bt_audio_off.jpg"/><img src="images/icons/bt_audio_on.jpg"/></a></div>
                 <div class="ma-addFileButton"><img src="images/icons/bt_file_off.jpg"/></div>
             </div>
@@ -122,7 +122,7 @@
                             break; 
 
                             case 2:
-                            mystring = "[[audio controls]][[source s'rc='files/"+response.data.url+ "type='audio/mpeg']]Your browser does not support the audio element.[[/audio]]"
+                            mystring = "[[audio controls]][[source src='files/"+response.data.url+ "' type='audio/mpeg']]Your browser does not support the audio element.[[/audio]]"
                             break;
                         }
                         this.addToContent(mystring);

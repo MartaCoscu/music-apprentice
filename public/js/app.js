@@ -71919,6 +71919,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         onLogged: function onLogged() {
+            this.checkUser();
             this.forcelogin = false;
         },
         logout: function logout() {
@@ -71932,6 +71933,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         onChangeSection: function onChangeSection(i) {
+            this.checkUser();
             console.log("seession");
             this.$refs.mainsection.onChangeSection(i);
         }
@@ -72251,8 +72253,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            perfil: false,
-            ejercicios: true,
+            perfil: true,
+            ejercicios: false,
             sesiones: false
         };
     },
@@ -72526,10 +72528,62 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['user'],
+    watch: {
+        user: function user(newVal, oldVal) {
+            var _this = this;
+
+            // 
+
+            this.myuser.name = this.user.name;
+            this.myuser.email = this.user.email;
+            this.myuser.bio = this.user.bio;
+            this.myuser.avatar_url = this.user.avatar_url;
+            this.myuser.id = this.user.id;
+            this.cuser = this.user;
+
+            var formData = new FormData();
+            axios.get('/getNumbers/', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function (response) {
+                console.log(response);
+                _this.numSessions = response.data.numSessions;
+                _this.numExercices = response.data.numExercices;
+            }).catch(function (error) {
+                console.log("error" + error);
+            });
+        }
+    },
     data: function data() {
         return {
             edit: false,
@@ -72540,22 +72594,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 bio: "",
                 avatar_url: "",
                 id: ""
-            }
+            },
+            numExercices: "",
+            numSessions: ""
         };
     },
     mounted: function mounted() {
+        var _this2 = this;
+
         this.myuser.name = this.user.name;
         this.myuser.email = this.user.email;
         this.myuser.bio = this.user.bio;
         this.myuser.avatar_url = this.user.avatar_url;
         this.myuser.id = this.user.id;
         this.cuser = this.user;
+
+        var formData = new FormData();
+        axios.get('/getNumbers/', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(function (response) {
+            console.log(response);
+            _this2.numSessions = response.data.numSessions;
+            _this2.numExercices = response.data.numExercices;
+        }).catch(function (error) {
+            console.log("error" + error);
+        });
     },
 
 
     methods: {
         onFileChange: function onFileChange(e) {
-            var _this = this;
+            var _this3 = this;
 
             this.ma_errors = [];
             var files = e.target.files || e.dataTransfer.files;
@@ -72578,12 +72649,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }).then(function (response) {
                     console.log(response.data);
                     var mystring = "users/" + response.data.url;
-                    _this.myuser.avatar_url = mystring;
+                    _this3.myuser.avatar_url = mystring;
                     console.log(mystring);
                 }).catch(function (error) {
                     console.log("error" + error);
 
-                    _this.ma_errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb");
+                    _this3.ma_errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb");
                 });
             }
         },
@@ -72597,7 +72668,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.edit = false;
         },
         save: function save() {
-            var _this2 = this;
+            var _this4 = this;
 
             var formData = new FormData();
             formData.append('_method', 'patch');
@@ -72614,8 +72685,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 console.log(response);
                 //this.user = response.data;
-                _this2.edit = false;
-                _this2.$emit("checkUser");
+                _this4.edit = false;
+                _this4.$emit("checkUser");
             }).catch(function (error) {
                 console.log("error" + error);
             });
@@ -72757,7 +72828,69 @@ var render = function() {
             [_vm._v("Actualizar")]
           )
         ])
-      : _vm._e(),
+      : _c("div", [
+          _c(
+            "a",
+            {
+              attrs: { href: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                }
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "ma-exerciceCard ma-exerciceCardSession" },
+                [
+                  _c("div", { staticClass: "ma-exerciceCardName " }, [
+                    _vm._v("\n                Ejercicios\n            ")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ma-exerciceCardValues" }, [
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.numExercices) +
+                        "\n            "
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              attrs: { href: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                }
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "ma-exerciceCard ma-exerciceCardSession" },
+                [
+                  _c("div", { staticClass: "ma-exerciceCardName " }, [
+                    _vm._v("\n                Sesiones\n            ")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ma-exerciceCardValues" }, [
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.numSessions) +
+                        "\n            "
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        ]),
     _vm._v(" "),
     _vm.edit
       ? _c("div", { staticClass: "ma-button" }, [
@@ -73166,6 +73299,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -73319,6 +73453,16 @@ var render = function() {
         },
         [
           _c("ul", [
+            _vm.edit
+              ? _c("li", [
+                  _c(
+                    "label",
+                    { staticClass: "ma-label-text", attrs: { for: "email" } },
+                    [_vm._v("Avatar:")]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
             _c("input", {
               staticStyle: { display: "none" },
               attrs: {
@@ -73493,7 +73637,7 @@ var render = function() {
             _vm._v(" "),
             _vm._m(5),
             _vm._v(" "),
-            _c("li", { staticClass: "ma-align-center" }, [
+            _c("li", { staticClass: "ma-button" }, [
               _c(
                 "a",
                 {
@@ -73574,7 +73718,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "ma-align-center" }, [
+    return _c("li", { staticClass: "ma-button" }, [
       _c("button", { attrs: { type: "submit" } }, [_vm._v("Sing Up")])
     ])
   }
@@ -73781,9 +73925,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -73848,17 +73989,15 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm.window.greater
-        ? _c("exerciceFormDesktop", {
-            attrs: { exercice: _vm.exercice, edit: _vm.edit },
-            on: {
-              list: function($event) {
-                _vm.onList()
-              },
-              onShow: _vm.onShow
-            }
-          })
-        : _c("exerciceFormMobile")
+      _c("exerciceFormDesktop", {
+        attrs: { exercice: _vm.exercice, edit: _vm.edit },
+        on: {
+          list: function($event) {
+            _vm.onList()
+          },
+          onShow: _vm.onShow
+        }
+      })
     ],
     1
   )
@@ -73961,8 +74100,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -73983,14 +74120,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             categoria_id: 1,
             session_id: -1,
             text: '',
-            ma_errors: []
+            ma_errors: [],
+            categories: []
         };
     },
     mounted: function mounted() {
+        var _this = this;
 
         if (this.edit == true) {
             this.name = this.exercice.name, this.description = this.exercice.description, this.categoria_id = this.exercice.categoria_id, this.text = this.exercice.text;
         }
+
+        var formData = new FormData();
+
+        axios.get('/exercices/create', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(function (response) {
+            _this.categories = response.data;
+            _this.$emit('onShow', response.data.exercice.id);
+        }).catch(function (error) {
+            console.log("error" + error);
+        });
     },
 
 
@@ -74000,7 +74152,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.text = html;
         },
         onSubmit: function onSubmit() {
-            var _this = this;
+            var _this2 = this;
 
             var formData = new FormData();
             formData.append('name', this.name);
@@ -74018,7 +74170,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 }).then(function (response) {
                     console.log(response.request);
-                    _this.$emit('onShow', _this.exercice.id);
+                    _this2.$emit('onShow', _this2.exercice.id);
                 }).catch(function (error) {
                     console.log("error" + error);
                 });
@@ -74030,7 +74182,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 }).then(function (response) {
                     console.log(response.data.exercice.id);
-                    _this.$emit('onShow', response.data.exercice.id);
+                    _this2.$emit('onShow', response.data.exercice.id);
                 }).catch(function (error) {
                     console.log("error" + error);
                 });
@@ -74112,7 +74264,6 @@ var render = function() {
                       expression: "categoria_id"
                     }
                   ],
-                  attrs: { name: "categoria_id" },
                   on: {
                     change: function($event) {
                       var $$selectedVal = Array.prototype.filter
@@ -74129,15 +74280,17 @@ var render = function() {
                     }
                   }
                 },
-                [
-                  _c("option", { attrs: { value: "0" } }, [_vm._v("Volvo")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "1" } }, [_vm._v("Saab")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "2" } }, [_vm._v("Fiat")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "3" } }, [_vm._v("Audi")])
-                ]
+                _vm._l(_vm.categories, function(categoria) {
+                  return _c(
+                    "option",
+                    {
+                      attrs: { name: "exercice", categoria: _vm.categories },
+                      domProps: { value: categoria.id }
+                    },
+                    [_vm._v(" " + _vm._s(categoria.name))]
+                  )
+                }),
+                0
               )
             ]),
             _vm._v(" "),
@@ -74563,7 +74716,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             break;
 
                         case 2:
-                            mystring = "[[audio controls]][[source s'rc='files/" + response.data.url + "type='audio/mpeg']]Your browser does not support the audio element.[[/audio]]";
+                            mystring = "[[audio controls]][[source src='files/" + response.data.url + "' type='audio/mpeg']]Your browser does not support the audio element.[[/audio]]";
                             break;
                     }
                     _this2.addToContent(mystring);
@@ -74698,7 +74851,7 @@ var render = function() {
             attrs: {
               id: "inputAudio",
               type: "file",
-              accept: ".mp3,.wav",
+              accept: ".mp3,.wav,.ogg",
               name: "input_audio"
             },
             on: { change: _vm.onAudioUploaded }
@@ -75288,15 +75441,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['exercice'],
 
     data: function data() {
-        return {};
+        return {
+            src: ""
+        };
     },
     mounted: function mounted() {
         console.log('Component mounted.');
+        this.src = "categories/" + this.exercice.categoria_id + ".png";
     },
 
 
@@ -75329,7 +75488,15 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "ma-exerciceCard" }, [
-          _vm._v("\n        " + _vm._s(_vm.exercice.name) + "\n    ")
+          _c("div", { staticClass: "ma-exerciceCardName" }, [
+            _c("img", {
+              staticClass: "ma_icon_session",
+              attrs: { src: _vm.src }
+            }),
+            _vm._v(
+              "\n                " + _vm._s(_vm.exercice.name) + "\n        "
+            )
+          ])
         ])
       ]
     )
@@ -76443,6 +76610,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -76467,7 +76636,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         }).then(function (response) {
             console.log(response.data.exercices);
-            _this.name = response.name;
+            _this.name = response.data.name;
             _this.exercices = response.data.exercices;
         }).catch(function (error) {
             console.log("error" + error);
@@ -76538,7 +76707,7 @@ var render = function() {
               return _c("exerciceInSessionCard", {
                 key: exercice.id,
                 staticClass: "ma-exerciceCardParent",
-                attrs: { exercice: exercice },
+                attrs: { exercice: exercice, session: _vm.id },
                 on: {
                   onShow: function($event) {
                     _vm.onShow(exercice)
@@ -76652,14 +76821,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['exercice'],
+    props: ['exercice', 'session'],
 
     data: function data() {
-        return {};
+        return {
+            src: "",
+            tempo: "",
+            seconds: ""
+        };
     },
-    mounted: function mounted() {},
+    mounted: function mounted() {
+        var _this = this;
+
+        this.src = "categories/" + this.exercice.categoria_id + ".png";
+
+        var formData = new FormData();
+        formData.append('session', this.session);
+        formData.append('exercice', this.exercice.id);
+
+        axios.post('/exerciceInSession', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(function (response) {
+            console.log(response);
+            _this.tempo = response.data.tempo;
+            _this.seconds = response.data.seconds;
+        }).catch(function (error) {
+            // console.log("error" + error)
+        });
+    },
 
 
     methods: {
@@ -76690,8 +76890,20 @@ var render = function() {
         }
       },
       [
-        _c("div", { staticClass: "ma-exerciceCard" }, [
-          _vm._v("\n        " + _vm._s(_vm.exercice.name) + "\n    ")
+        _c("div", { staticClass: "ma-exerciceCard ma-exerciceCardSession" }, [
+          _c("div", { staticClass: "ma-exerciceCardName " }, [
+            _c("img", {
+              staticClass: "ma_icon_session",
+              attrs: { src: _vm.src }
+            }),
+            _vm._v("\n            " + _vm._s(_vm.exercice.name) + "\n        ")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "ma-exerciceCardValues" }, [
+            _vm._v("\n            " + _vm._s(_vm.tempo)),
+            _c("br"),
+            _vm._v("\n            " + _vm._s(_vm.seconds) + "\n        ")
+          ])
         ])
       ]
     )
@@ -77035,8 +77247,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             myTempo: "",
             seconds: "",
             fullExercice: {},
-            realText: ''
-
+            realText: '',
+            pause: false
         };
     },
     mounted: function mounted() {
@@ -77089,7 +77301,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.playing == true) {
                 console.log("timer");
                 var self = this;
-                this.timer = parseInt(this.timer) - 1;
+                if (this.pause == false) {
+                    this.timer = parseInt(this.timer) - 1;
+                }
                 if (this.timer <= 0) {
                     this.$emit("onNext");
                 }
@@ -77101,12 +77315,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         uploadMetronome: function uploadMetronome() {
             if (this.playing == true) {
                 var audio = new Audio('metronome.wav');
-                audio.play();
+                if (this.pause == false) {
+                    audio.play();
+                }
                 var self = this;
                 var time = 60000 / this.tempo;
                 setTimeout(function () {
                     self.uploadMetronome();
                 }, time, "JavaScript");
+            }
+        },
+        onPause: function onPause() {
+
+            if (this.pause == true) {
+                this.pause = false;
+            } else {
+                this.pause = true;
             }
         }
     }
@@ -77181,6 +77405,25 @@ var render = function() {
           ]
         )
       ])
+    ]),
+    _vm._v(" "),
+    _c("li", { staticClass: "ma-button" }, [
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.onPause($event)
+            }
+          }
+        },
+        [
+          _vm.pause
+            ? _c("span", [_vm._v("Play")])
+            : _c("span", [_vm._v("Pause")])
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("p", {

@@ -38,10 +38,8 @@ class exerciceController extends Controller
     public function create(Request $request)
     {
 
-        $categories = Category::all(); 
-
-      //  return $categories;
-        return view ('musicapprentice.exercices.create', compact(['categories', 'request'])); 
+        $categories = Category::all();  
+        return $categories;
     }
 
 
