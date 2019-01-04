@@ -1,7 +1,7 @@
 <template>
     <div class="ma-menu-left">
     	<a href="" v-on:click.prevent="onSelect(0)"><div class="ma-name-user">
-    		Nombre de usuario
+    		{{ user.name }}
             <img v-bind:src="user.avatar_url"/> 
     	</div></a>
     	<opcionMenu name="Ejercicios" img="images/icons/ejercicio.png" @onSelect="onSelect(1)"></opcionMenu>

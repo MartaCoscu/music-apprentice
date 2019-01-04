@@ -72093,7 +72093,7 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "ma-name-user" }, [
-            _vm._v("\n\t\tNombre de usuario\n        "),
+            _vm._v("\n\t\t" + _vm._s(_vm.user.name) + "\n        "),
             _c("img", { attrs: { src: _vm.user.avatar_url } })
           ])
         ]
