@@ -1,7 +1,7 @@
 <template>
 	<div class="ma-navbar">
-		<div class="ma-container">
-			music-apprentice
+		<div class="ma-container ">
+			<span class="ma-fancy">music-apprentice</span>
 			<search></search>
 		</div>
 	</div>

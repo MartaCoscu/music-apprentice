@@ -1,8 +1,6 @@
 <template>
     <div>
-        holi
-        {{ window.width }}
-        <exerciceFormDesktop v-if="window.greater">
+        <exerciceFormDesktop  @list="onList()" @onShow="onShow" v-if="window.greater" :exercice=exercice :edit=edit>
         </exerciceFormDesktop>
 
         <exerciceFormMobile v-else>
@@ -14,6 +12,21 @@
 <script>
 
     export default {
+        props: {
+            exercice:
+            {
+                default: 
+                    function () { 
+                        return {
+
+                        } 
+                    }   
+            },
+            edit:
+            {
+                default: false, 
+            } 
+        },
 
         data(){
             return{                    
@@ -24,22 +37,17 @@
                 }
             }
         },
-
-        mounted() {
-
-        },
-        beforeDestroy() {
-            this.editor.destroy()
-        },
-        created() {
-            window.addEventListener('resize', this.handleResize)
-            this.handleResize();
-        },
-        destroyed() {
-            window.removeEventListener('resize', this.handleResize)
-        },
-
         methods: {
+
+            onList(){
+                this.$emit('list'); 
+            },
+
+            onShow(id){
+                console.log("llamamos a la id: " + id);
+                this.$emit('onShow', id); 
+            },
+
             handleResize() {
                 this.window.width = window.innerWidth;
                 this.window.height = window.innerHeight;
@@ -49,6 +57,17 @@
                     this.window.greater = false; 
                 }
             } 
-        }
+        },
+
+        mounted() {
+
+        },
+        created() {
+            window.addEventListener('resize', this.handleResize)
+            this.handleResize();
+        },
+        destroyed() {
+            window.removeEventListener('resize', this.handleResize)
+        },
     }
 </script>

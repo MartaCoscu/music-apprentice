@@ -9,7 +9,7 @@ use musicapprentice\User;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Auth; 
-
+use Illuminate\Routing\Redirector;
 class customAuth extends Controller
 {
     /**
@@ -51,12 +51,7 @@ class customAuth extends Controller
     	$user->avatar_url = ""; 
 
 
-    	if ($request -> hasFile('image_file')){
-    		$file = $request->file('image_file');
-    		$name = time().$file->getClientOriginalName();
-    		$file->move(public_path().'/images/users/', $name);
-    		$user->avatar_url = $name;
-    	}
+    	$user->avatar_url = $request->image_file;
     	$user->save(); 
     	$credentials = $request->only('email', 'password'); 
 
@@ -89,7 +84,6 @@ class customAuth extends Controller
 
     public function LogOut(){
     	Auth::LogOut(); 
-    	return; 
     }
 
     public function LoggedIn(){
@@ -100,4 +94,28 @@ class customAuth extends Controller
     	}
     }
 
+    public function uploadAvatar(Request $request){
+       if ($request -> hasFile('file')){
+                $file = $request->file('file');
+                $oldname = $file->getClientOriginalName();
+                $name = time().$file->getClientOriginalName();
+                $file->move(public_path().'/users/', $name);
+                return response()->json(['url' => $name]);
+        }
+    }
+
+    public function updateuser(Request $request){
+        $user = User::findOrFail($request->id); 
+        $user->name = $request->name;
+        $user->id = $request->id;
+        $user->email = $request->email;
+        $user->bio = $request->bio;
+        $user->avatar_url = $request->avatar_url;
+
+        $user->save(); 
+
+
+        return $user; 
+//        $request->user->save(); 
+    }
 }

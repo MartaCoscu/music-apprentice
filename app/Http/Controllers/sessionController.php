@@ -4,24 +4,22 @@ namespace musicapprentice\Http\Controllers;
 
 use Illuminate\Http\Request;
 use musicapprentice\Session;
+use musicapprentice\Exercice;
 
 class sessionController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-
-    public function __construct()
+    public function index(Request $request)
     {
-        $this->middleware('auth');
-    }
-
-    public function index()
-    {
-        //
+        $sessions = $request->user()->sessions; 
+        
+       // return "index";
+        return $sessions; 
     }
 
     /**
@@ -43,20 +41,23 @@ class sessionController extends Controller
     public function store(Request $request)
     {
 
-        $validatedData = $request->validate([
-
-            'name' => 'required',
-            'description' => 'required',
-        ]);
+        $array = json_decode($request->exercices, true);
 
         $session = new Session(); 
         $session->name = $request->name; 
-        $session->description = $request->description; 
+        $session->description = " "; 
         $session->user_id = $request->user()->id; 
+
         $session->save(); 
 
-        return redirect()->route('home')->with('status', 'Sesión creada correctamente');
+        for ($i = 0; $i < count($array); $i++) {
 
+          //  return $myExercice;
+            $exercice = Exercice::where('id', $array{$i}['id'])->first();
+            $session->exercices()->attach($exercice,['tempo' => $array{$i}['tempo'], 'seconds' => $array{$i}['seconds']]); 
+        }
+
+        return response()->json(['exercice' => $request->data]); 
     }
 
     /**
@@ -67,8 +68,31 @@ class sessionController extends Controller
      */
     public function show($id)
     {
-        //
+        $session = Session::findOrFail($id); 
+
+        $exercices = $session->exercices; 
+
+        return response()->json(['name' => $session->name, 'exercices'=> $exercices]); 
     }
+
+    public function exerciceInSession(Request $request){
+
+        $session = Session::findOrFail($request->session); 
+
+        $exerciceObject = Exercice::findOrFail($request->exercice); 
+
+        $exercice = $request->exercice;
+
+        $myExercice = $session->exercices->find($exercice);
+
+        $tempo = $myExercice->pivot->tempo;
+        $seconds = $myExercice->pivot->seconds;
+
+
+        return response()->json(['name' => $exerciceObject->name, 'exercice' => $exerciceObject, 'tempo' => $tempo, 'seconds' => $seconds]); 
+    }
+
+
 
     /**
      * Show the form for editing the specified resource.

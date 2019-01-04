@@ -6,24 +6,25 @@
         </div>
         <form method="POST" action="" v-on:submit.prevent="onSubmit()">
             <ul>
-                <li><label class="ma-label-text" for="image_file">Avatar</label></li>
-                <li><input name="image_file" type="file" v-on:change="onFileChange"> </li>  
-                <li><label class="ma-label-text" for="name">Nombre de usuario:</label>
-                    <input type="text" v-model="name" class="ma-input-text" name="name" required>
+                <input id="inputImg" v-on:change="onFileChange" accept=".jpg,.png"   name="input_img" type="file" style="display: none" />
+                <li class="uploadAvatar" ref="avatar"><a v-on:click.prevent="onUploadImg" href=""><img class="ma-user-pic" v-bind:src="image_file"/></a></li>
+               
+                <li><label class="ma-label-text" for="name">Nombre de usuario:</label></li>
+                    <li><input type="text" v-model="name" class="ma-input-text" name="name" required>
                 </li>
-                <li><label class="ma-label-text" for="email">E-mail:</label>
-                    <input type="email" class="ma-input-text" v-model="email" name="email" required>
+                <li><label class="ma-label-text" for="email">E-mail:</label></li>
+                    <li><input type="email" class="ma-input-text" v-model="email" name="email" required>
                 </li>
-                <li><label class="ma-label-text" for="bio">Biografia:</label>
-                    <textarea class="ma-input-text" v-model="bio" name="bio"></textarea>
+                <li><label class="ma-label-text" for="bio">Biografia:</label></li>
+                    <li><textarea class="ma-input-text" v-model="bio" name="bio" required></textarea>
                 </li>  
 
-                <li><label class="ma-label-text" for="password">Contraseña</label>
-                    <input id="password" class="ma-input-text"  v-model="password" type="password" name="password" required>
+                <li><label class="ma-label-text" for="password">Contraseña</label></li>
+                    <li><input id="password" class="ma-input-text"  v-model="password" type="password" name="password" required>
                 </li> 
 
-                <li><label class="ma-label-text"  for="password">Repetir contraseña</label>
-                    <input id="password" v-model="new_password" class="ma-input-text" type="password" name="password" required>
+                <li><label class="ma-label-text"  for="password">Repetir contraseña</label></li>
+                <li><input id="password" v-model="new_password" class="ma-input-text" type="password" name="password" required>
                 </li>   
 
                 <li class="ma-align-center"><button type="submit">Sing Up</button></li>
@@ -39,7 +40,7 @@
 
         data(){
             return {
-                image_file: '',
+                image_file: 'users/user.png',
                 name: '',
                 email: '',
                 password: '',
@@ -115,11 +116,38 @@
             },
 
             onFileChange(e) {
+                this.ma_errors= [];
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
-                return;
-            //    this.createImage(files[0]);
-                this.image_file = files[0]; 
+                    return;
+                   // this.createImage(files[0]);
+                   this.file = files[0];
+
+                   if (this.file.size > 8000000){
+
+                    this.ma_errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb"); 
+                } else {
+                    let formData = new FormData();
+                    formData.append('file', this.file);
+
+                    axios({
+                        method: 'post',
+                        url: '/avatar',
+                        headers:{'Content-Type': 'multipart/form-data', 'X-Content-Type-Options': 'nosniff'},
+                        data: formData
+                    })
+                    .then((response) => {
+                        console.log(response.data); 
+                        let mystring = "users/" + response.data.url; 
+                        this.image_file=mystring; 
+                        console.log(mystring); 
+                     })
+                    .catch((error) => {
+                        console.log("error" + error);
+
+                        this.ma_errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb"); 
+                    })             
+                }
             },
 
             createImage(file) {
@@ -129,6 +157,10 @@
                 };
                 reader.readAsDataURL(file);
             },
+
+            onUploadImg(){
+                $("#inputImg").trigger("click");
+            }
 
         }
     }

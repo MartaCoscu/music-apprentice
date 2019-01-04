@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
+<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet"> 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -23,7 +23,7 @@
     <div id="app">
  
             
-        <layout></layout>
+     <layout></layout>
     </div>
 </body>
 </html>

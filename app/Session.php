@@ -15,7 +15,7 @@ class Session extends Model
 
 	public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('musicapprentice\User');
     }
 }
 

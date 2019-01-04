@@ -1,6 +1,20 @@
 <template>
     <div>
-        count {{ exercices.length }}
+        <h1>EJERCICIOS</h1>
+
+
+        <div class="ma-exercices-container" >
+            <exerciceCard class="ma-exerciceCardParent" @onShow="onShow(exercice)" v-for="exercice in exercices"
+            :key="exercice.id"
+            :exercice = "exercice">
+            </exerciceCard>
+    </div>
+
+<div class="ma-button">
+    <button v-on:click.prevent="add">Crear Nuevo</button>
+</div>
+
+       <!-- count {{ exercices.length }}
         <button v-on:click.prevent="next">next</button>
         <button v-on:click.prevent="prev">prev</button>
 
@@ -10,7 +24,7 @@
                 :exercice = "exercice">
                 <exercice :exercice = "exercice"></exercice> 
             </div>        
-        </siema>
+        </siema>-->
     </div>    
 </template>
 
@@ -19,7 +33,7 @@
 
         data(){
             return{                    
-                options: {
+               /* options: {
                     duration: 200,
                     easing: 'ease-out',
                     perPage: 1,
@@ -29,42 +43,50 @@
                     threshold: 20,
                     loop: false,
                     rtl: false
-                },
+                },*/
 
                 exercices:[
 
                 ],
-                window: {
+                /*window: {
                     width: 0,
                     height: 0,
                     mobile: false
-                }
+                }*/
             }
         },
 
 
 
         mounted() {
-            window.addEventListener('resize', this.handleResize)
-            this.handleResize();
+        //    window.addEventListener('resize', this.handleResize)
+          //  this.handleResize();
             axios.get('/exercices').then((response) => {
                 this.exercices = response.data;
                 console.log("exercices: " + this.exercices); 
-                this.$refs.siema.init(); 
+           //     this.$refs.siema.init(); 
             });
 
             console.log('Component mounted.')
         },
         created() {
-            window.addEventListener('resize', this.handleResize)
-            this.handleResize();
+          /*  window.addEventListener('resize', this.handleResize)
+            this.handleResize();*/
         },
         destroyed() {
-            window.removeEventListener('resize', this.handleResize)
+           // window.removeEventListener('resize', this.handleResize)
         },
 
         methods: {
-            initFunc(){
+
+            onShow(exercice){
+                this.$emit("onShow", exercice.id); 
+            },
+
+            add(){
+                this.$emit("add"); 
+            },
+   /*         initFunc(){
                 console.log("init"); 
             },
 
@@ -90,7 +112,7 @@
                 }else {
                     this.window.greater = false; 
                 }
-            }        
+            }*/        
         }
     }
 </script>

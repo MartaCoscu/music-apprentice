@@ -2,25 +2,24 @@
     <div>
 
         <div class="ma-editor">
-           <div class="ma-error" v-for="error in ma_errors">
-            {{ error }}
-        </div>
-        <div class="ma-addFiles">
-            no
-            <input id="inputImg" v-on:change="onImgUploaded" accept=".jpg,.png"   name="input_img" type="file" style="display: none" />
-            <div class="ma-addFileButton"><a v-on:click.prevent="onUploadImg" href=""><img src="images/icons/bt_img_off.jpg"/><img src="images/icons/bt_img_on.jpg"/></a></div>
+            <div class="ma-error" v-for="error in ma_errors">
+                {{ error }}
+            </div>
+            <div class="ma-addFiles">
+                <input id="inputImg" v-on:change="onImgUploaded" accept=".jpg,.png"   name="input_img" type="file" style="display: none" />
+                <div class="ma-addFileButton"><a v-on:click.prevent="onUploadImg" href=""><img src="images/icons/bt_img_off.jpg"/><img src="images/icons/bt_img_on.jpg"/></a></div>
 
-            <input id="inputVideo" v-on:change="onVideoUploaded" type="file" accept=".mp4" name="input_video" style="display: none" />
-            <div class="ma-addFileButton"><a v-on:click.prevent="onUploadVideo" href=""><img src="images/icons/bt_video_off.jpg"/><img src="images/icons/bt_video_on.jpg"/></a></div>
+                <input id="inputVideo" v-on:change="onVideoUploaded" type="file" accept=".mp4" name="input_video" style="display: none" />
+                <div class="ma-addFileButton"><a v-on:click.prevent="onUploadVideo" href=""><img src="images/icons/bt_video_off.jpg"/><img src="images/icons/bt_video_on.jpg"/></a></div>
 
-            <input id="inputAudio" v-on:change="onAudioUploaded" type="file" accept=".mp3,.wav" name="input_audio" style="display: none" />
-            <div class="ma-addFileButton"><a href="" v-on:click.prevent="onUploadAudio"><img src="images/icons/bt_audio_off.jpg"/><img src="images/icons/bt_audio_on.jpg"/></a></div>
-            <div class="ma-addFileButton"><img src="images/icons/bt_file_off.jpg"/></div>
+                <input id="inputAudio" v-on:change="onAudioUploaded" type="file" accept=".mp3,.wav" name="input_audio" style="display: none" />
+                <div class="ma-addFileButton"><a href="" v-on:click.prevent="onUploadAudio"><img src="images/icons/bt_audio_off.jpg"/><img src="images/icons/bt_audio_on.jpg"/></a></div>
+                <div class="ma-addFileButton"><img src="images/icons/bt_file_off.jpg"/></div>
+            </div>
+            <editor-content :editor="editor" />
         </div>
-        <editor-content :editor="editor" />
+
     </div>
-
-</div>
 </template>
 
 <script>
@@ -29,6 +28,12 @@
     export default {
         components: {
             EditorContent,
+        },
+
+        props: {
+            text:{
+                default:'Escribe aquí tu ejercicio',
+            },
         },
         data() {
             return {
@@ -48,6 +53,7 @@
         },
 
         mounted() {
+            this.editor.setContent(this.text); 
             this.html = this.editor.getHTML();
             this.$emit("updatedHtml", this.html); 
 
@@ -116,7 +122,7 @@
                             break; 
 
                             case 2:
-                            mystring = "[[audio controls]][[source src='files/{{$exercice->audio}}' type='audio/mpeg']]Your browser does not support the audio element.[[/audio]]"
+                            mystring = "[[audio controls]][[source s'rc='files/"+response.data.url+ "type='audio/mpeg']]Your browser does not support the audio element.[[/audio]]"
                             break;
                         }
                         this.addToContent(mystring);
@@ -127,6 +133,8 @@
                         this.ma_errors.push("Hubo un error al subir el archivo. Tamaño máximo: 8mb"); 
                     })             
                 }
+                this.editor.focus()
+
             },
 
             addToContent(mystring){
@@ -149,6 +157,7 @@ clearContent() {
     this.editor.focus()
 },
 setContent() {
+
                 // you can pass a json document
                 this.editor.setContent({
                     type: 'doc',

@@ -56,7 +56,6 @@ class exerciceController extends Controller
             $oldname = $file->getClientOriginalName();
             $name = time().$file->getClientOriginalName();
             $file->move(public_path().'/files/', $name);
-            $exercice->image = $name;
             return response()->json(['name' => $oldname, 'url' => $name]); 
 
         }
@@ -77,26 +76,18 @@ class exerciceController extends Controller
 
         $exercice = new Exercice(); 
 
-
-
         $exercice->name = $request->name;
-
         $exercice->text = $request->text;
-
         $exercice->description = $request->description;
-
         $exercice->user_id = $request->user()->id; 
         $exercice->categoria_id = $request->categoria_id; 
-
         $exercice->save();
-
 
         if ($request->session_id != -1){
             $session = Session::where('id', $request->session_id)->first();
             $session->exercices()->attach($exercice,['tempo' => 120, 'seconds' => 300]);            
         }
-
-        return "ok"; 
+        return response()->json(['exercice' => $exercice]); 
    //    return response()->json(['text' => 'ok'); 
 
     }
@@ -109,10 +100,11 @@ class exerciceController extends Controller
      */
     public function show(Exercice $exercice, Request $request)
     {
-        return "show";
 
-        return view('musicapprentice.exercices.show', compact(['request', 'exercice']));
+        return response()->json(['exercice' => $exercice, 'request' => $request]); 
 
+
+        
     //    return 'show';
     }
 
@@ -137,58 +129,36 @@ class exerciceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Exercice $exercice)
-    {
+    public function update(Request $request, $id)
+        {
 
-        $validatedData = $request->validate([
-
-            'name' => 'required',
-            'description' => 'required',
-            'text' => 'required',
-            'image_file' => 'size:1000',
-            'audio_file' => 'size:4000',
-            'video_file' => 'size:15000',
-
-        ]);
-
-        $exercice->name = $request->name;
+//return $request;
+        $exercice = Exercice::findOrFail($id); 
+        
+//return $exercice; 
+         $exercice->name = $request->name;
+        $exercice->text = "$request->text";
         $exercice->description = $request->description;
-        $exercice->text = $request->text;
-
         $exercice->user_id = $request->user()->id; 
         $exercice->categoria_id = $request->categoria_id; 
 
-
-        if ($request -> hasFile('image_file')){            
-            $file = $request->file('image_file'); 
-            $name = time().$file->getClientOriginalName();
-            $file->move(public_path().'/images/', $name);
-            $exercice->image = $name;            
-        }
-
-
-        if ($request -> hasFile('video_file')){
-            $file = $request->file('video_file'); 
-            $name = time().$file->getClientOriginalName();
-            $file->move(public_path().'/videos/', $name);
-            $exercice->video = $name;
-        }   
-
-
-        if ($request -> hasFile('audio_file')){
-            $file = $request->file('audio_file'); 
-            $name = time().$file->getClientOriginalName();
-            $file->move(public_path().'/audios/', $name);
-            $exercice->audio = $name;
-        }   
-
         $exercice->save();
+        return $exercice->name; 
+
+
         if ($request->session_id != -1){
             $session = Session::where('id', $request->session_id)->first();
             $session->exercices()->attach($exercice,['tempo' => 120, 'seconds' => 300]);            
         }
-        return redirect()->route('exercices.show', [$exercice])->with('status', 'Ejercicio guardado correctamente');
-       // return 'update'; 
+
+        $exercice->save();
+
+        if ($request->session_id != -1){
+            $session = Session::where('id', $request->session_id)->first();
+            $session->exercices()->attach($exercice,['tempo' => 120, 'seconds' => 300]);            
+        }
+        return response()->json(['exercice' => $exercice]); 
+
     }
 
 
@@ -201,25 +171,6 @@ class exerciceController extends Controller
      */
     public function destroy(Exercice $exercice)
     {
-
-        return "destroy";
-        if(!empty($exercice->image)){
-            $image_path = public_path().'/images/'.$exercice->image;
-            \File::delete($image_path);
-        }
-
-        if(!empty($exercice->video)){
-            $video_path = public_path().'/videos/'.$exercice->video;
-            \File::delete($video_path);
-        }
-
-        if(!empty($exercice->audio)){
-            $audio_path = public_path().'/audios/'.$exercice->audio;
-            \File::delete($audio_path);
-        }
-
-
-
         $exercice->delete();
 
         return redirect()->route('exercices.index')->with('status', 'Ejercicio borrado correctamente');

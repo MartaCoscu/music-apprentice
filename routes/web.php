@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,8 +21,18 @@ Route::post('/login', 'customAuth@login')->name('LogIn');
 
 Route::get('/logout', 'customAuth@logout')->name('LogOut');
 Route::get('/loggedin', 'customAuth@loggedin')->name('LoggedIn');
+Route::patch('/user', 'customAuth@updateuser')->name('User');
+
+
 
 Route::post('/upload', 'exerciceController@uploadFile')->name('uploadFile');
+
+
+Route::post('/avatar', 'customAuth@uploadAvatar')->name('uploadAvatar');
+
+//Route::post('/exerciceInSession', 'sessionController@ExerciceInSession')->name('exerciceInSession');
+
+Route::post('exerciceInSession/', 'sessionController@exerciceInSession');
 
 
 Route::resource('users', 'userController');

@@ -25,6 +25,8 @@ Vue.use(Siema)
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
+
+ 
 Vue.component('navbar', require('./components/NavbarComponent.vue'));
 Vue.component('exercice', require('./components/ExerciceComponent.vue'));
 Vue.component('exercices', require('./components/ExercicesComponent.vue'));
@@ -42,6 +44,21 @@ Vue.component('exerciceForm', require('./components/ExerciceFormComponent.vue'))
 Vue.component('exerciceFormDesktop', require('./components/ExerciceFormComponentDesktop.vue'));
 Vue.component('exerciceFormMobile', require('./components/ExerciceFormComponentMobile.vue'));
 Vue.component('exerciceEditor', require('./components/ExerciceEditorComponent.vue'));
+Vue.component('exercicesSection', require('./components/ExercicesSection.vue'));
+Vue.component('perfilSection', require('./components/PerfilSection.vue'));
+Vue.component('sessionsSection', require('./components/SessionsSection.vue'));
+Vue.component('exerciceCard', require('./components/ExerciceCardComponent.vue'));
+Vue.component('createSection', require('./components/CreateSectionComponent.vue'));
+Vue.component('addExercice', require('./components/addExerciceComponent.vue'));
+Vue.component('sessionsList', require('./components/SessionsListComponent.vue'));
+Vue.component('sessionCard', require('./components/SessionCardComponent.vue'));
+Vue.component('exercicesListInSession', require('./components/ExercicesListInSession.vue'));
+Vue.component('showSession', require('./components/ShowSessionComponent.vue'));
+Vue.component('exerciceInSessionCard', require('./components/ExerciceInSessionCardComponent.vue'));
+Vue.component('playSession', require('./components/PlaySessionComponent.vue'));
+Vue.component('playingExercice', require('./components/PlayingExerciceComponent.vue'));
+
+
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))

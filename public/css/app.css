@@ -10484,8 +10484,8 @@ a:hover {
 
 button {
   background-color: #bc3e3f;
-  color: #e4c7b8;
-  border-color: #e4c7b8;
+  color: #fac3a6;
+  border-color: #fac3a6;
   font-weight: bold;
 }
 
@@ -10494,6 +10494,12 @@ button {
   .ma-menu-left {
     display: none;
   }
+}
+
+.ma-fancy {
+  font-family: 'Satisfy', cursive;
+  font-size: 1.5em;
+  margin-left: 0.5em;
 }
 
 .ma-content {
@@ -10517,18 +10523,19 @@ button {
 .ma-main-section {
   background-color: #fff;
   padding: 1em;
+  padding-top: 5em;
   width: 100%;
 }
 
 .ma-menu-left {
-  background-color: #e4c7b8;
+  background-color: #fac3a6;
   width: 300px;
 }
 
 .ma-navbar {
   background-color: #bc3e3f;
   padding: 1em;
-  color: #e4c7b8;
+  color: #fac3a6;
 }
 
 .ma-navbar .ma-search {
@@ -10577,6 +10584,10 @@ button {
   }
 }
 
+.ma-icon {
+  width: 30px;
+}
+
 .ma-icons {
   display: none;
   padding: 1em;
@@ -10584,7 +10595,7 @@ button {
 
 @media (max-width: 767px) {
   .ma-icons {
-    background-color: #e4c7b8;
+    background-color: #fac3a6;
     display: block;
   }
 
@@ -10616,7 +10627,12 @@ button {
 }
 
 .ma-name-user img {
-  padding-right: 1em;
+  width: 50px;
+  margin: auto;
+  height: auto;
+  border-radius: 50%;
+  display: block;
+  margin-top: 1em;
 }
 
 .ma-opcion {
@@ -10626,11 +10642,34 @@ button {
 }
 
 .ma-opcion img {
-  padding-right: 1em;
+  margin-right: 1em;
+}
+
+.ma-form {
+  margin: 0em 0;
+  text-align: center;
+}
+
+.ma-form form {
+  margin: auto;
+}
+
+.ma-form form ul {
+  margin-top: 0px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.ma-form form ul li {
+  margin: 1em 0;
+}
+
+.ma-editor-form {
+  margin: 0em 0;
+  text-align: center;
 }
 
 .ma-user {
-  margin: 5em 0;
   text-align: center;
 }
 
@@ -10639,30 +10678,23 @@ button {
   margin: auto;
 }
 
-.ma-user form ul {
-  text-align: left;
+ul {
   list-style-type: none;
   padding: 0;
 }
 
-.ma-user form ul input,
-.ma-user form ul textarea {
-  width: 300px;
-}
-
 .ma-user-pic {
   width: 40vw;
-  max-width: 300px;
-  margin: auto;
+  max-width: 200px;
+  margin: 1em auto;
   height: auto;
-  padding: 2em 0;
   border-radius: 50%;
   display: block;
 }
 
 .ma-login,
 .ma-singup {
-  margin: 3em auto;
+  margin: 2em auto;
 }
 
 .ma-login ul,
@@ -10677,24 +10709,61 @@ button {
   margin: 1em auto;
 }
 
-.ma-login .ma-label-text,
-.ma-singup .ma-label-text {
-  width: 200px;
-}
-
-.ma-login .ma-input-text,
-.ma-singup .ma-input-text {
-  width: 300px;
-}
-
-.ma-login .ma-align-center,
-.ma-singup .ma-align-center {
-  text-align: center;
-}
-
 .ma-login button,
 .ma-singup button {
   margin: auto;
+}
+
+.ma-align-center {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.ma-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.ma-button button {
+  margin: 2em;
+  padding: 1em;
+}
+
+@media (max-width: 767px) {
+  .ma-button button {
+    width: 70%;
+  }
+}
+
+@media (min-width: 768px) {
+  .ma-button button {
+    width: 70%;
+  }
+}
+
+@media (min-width: 992px) {
+  .ma-button button {
+    width: 200px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ma-button button {
+    width: 200px;
+  }
+}
+
+exercice-editor {
+  margin-bottom: 1em;
 }
 
 .ma-error {
@@ -10706,10 +10775,30 @@ button {
 }
 
 .ma-editor {
-  border: solid red 1px;
+  border: solid #bc3e3f 1px;
   margin: auto;
   padding: 1em;
   width: 100%;
+}
+
+.showExercice {
+  border: solid #bc3e3f 1px;
+  margin: auto;
+  padding: 1em;
+  width: 100%;
+  text-align: center;
+}
+
+.showExercicePlaying {
+  border: solid #bc3e3f 1px;
+  margin: 2em auto;
+  padding: 1em;
+  width: 100%;
+  text-align: center;
+}
+
+.ProseMirror {
+  min-height: 200px;
 }
 
 .ma-addFileButton a img:first-child {
@@ -10732,17 +10821,11 @@ button {
   display: flex;
 }
 
-.ma-siema,
-.ma-login,
-.ma-singup {
-  margin: auto;
-}
-
 @media (max-width: 767px) {
   .ma-siema,
   .ma-login,
   .ma-singup {
-    width: 500px;
+    width: 100%;
   }
 }
 
@@ -10770,6 +10853,15 @@ button {
   }
 }
 
+.ma-singup ul,
+.ma-login ul {
+  margin: auto;
+}
+
+.uploadAvatar {
+  text-align: center;
+}
+
 .ma-addFiles {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -10787,5 +10879,168 @@ button {
 .ma-addFileButton img {
   width: 100%;
   height: auto;
+}
+
+@media (max-width: 767px) {
+  .ma-exerciceCardParent {
+    width: 80%;
+  }
+}
+
+@media (min-width: 768px) {
+  .ma-exerciceCardParent {
+    width: 50%;
+  }
+}
+
+@media (min-width: 992px) {
+  .ma-exerciceCardParent {
+    width: 33%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ma-exerciceCardParent {
+    width: 33%;
+  }
+}
+
+.slide img {
+  width: 90%;
+}
+
+.ma-exerciceCard {
+  background-color: #fac3a6;
+  border: solid 3px #bc3e3f;
+  color: #6b6b6b;
+  padding: 2em;
+  font-weight: bold;
+  margin: 1em;
+}
+
+.ma-exercices-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.ma-around {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.ma-info {
+  margin-top: 1em;
+}
+
+.ma-header {
+  font-weight: bold;
+}
+
+.ma_playing_timer {
+  background: url("/images/input_time.png") no-repeat right top;
+}
+
+.ma_playing_metronome {
+  background: url("/images/input_tempo.png") no-repeat right top;
+}
+
+.ma-parameters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.ma-degradado {
+  background-size: 100%;
+}
+
+.ma-degradado input {
+  background: transparent;
+  border: none;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  color: #bc3e3f;
+  font-size: 2em;
+}
+
+@media (max-width: 767px) {
+  .ma-degradado input {
+    height: 40vw;
+    margin-top: 8%;
+  }
+}
+
+@media (min-width: 768px) {
+  .ma-degradado input {
+    height: 200px;
+    margin-top: 10%;
+  }
+}
+
+@media (min-width: 992px) {
+  .ma-degradado input {
+    height: 300px;
+    margin-top: 6%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ma-degradado input {
+    height: 300px;
+    margin-top: 8%;
+  }
+}
+
+.ma-degradado input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.ma-degradado input::-webkit-outer-spin-button,
+.ma-degradado input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.ma-container-exercices-session {
+  border: 2px solid #bc3e3f;
+  width: 100%;
+  padding: 2em;
+  margin: 1em auto;
+  text-align: center;
+}
+
+li {
+  text-align: center;
+}
+
+input,
+select,
+textarea {
+  width: 90%;
+  max-width: 600px;
+  margin: 0.5em auto;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 0.5em;
+}
+
+.ma-search {
+  width: 200px;
+}
+
+.ma-main-section {
+  text-align: center;
 }
 
